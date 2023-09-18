@@ -1,18 +1,13 @@
-import { useState } from "react";
-import Navbar from "./NavBar";
 import { Grid, GridItem, Heading, Show } from "@chakra-ui/react";
 import GenreList from "./GenreList";
 import MainContentContainer from "./MainContentContainer";
 
 function MainPage({ gameQuery, setGameQuery, onSelectGenre }) {
-  // const [gameQuery, setGameQuery] = useState({platform: null, genre: null, sortOrder: null})
-  // const onSelectGenre = (genre) => setGameQuery({ ...gameQuery, genre })
-
   return (
     <>
       <Grid
         templateAreas={{
-          base: `"main"`,
+          base: `"main main"`,
           lg: `"aside main"`,
         }}
         templateColumns={{
@@ -20,15 +15,6 @@ function MainPage({ gameQuery, setGameQuery, onSelectGenre }) {
           lg: "200px 1fr",
         }}
       >
-        {/* <GridItem area='nav'>
-          <Navbar
-            onSelectGenre={onSelectGenre}
-            selectedGenre={gameQuery.genre}
-            onSearch={(searchText) =>
-              setGameQuery({ ...gameQuery, searchText })
-            }
-          />
-        </GridItem> */}
         <Show above='lg'>
           <GridItem area='aside' paddingX={5}>
             <Heading

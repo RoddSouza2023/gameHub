@@ -4,7 +4,10 @@ import MainPage from "./components/MainPage";
 import PageNotFound from "./components/PageNotFound";
 import "./App.css";
 import DetailsPage from "./components/DetailsPage";
-import Navbar from "./components/NavBar";
+import Navbar from "./components/Navbar";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Cart from "./components/Cart";
 
 function App() {
   const [gameQuery, setGameQuery] = useState({
@@ -34,6 +37,9 @@ function App() {
         ></Route>
         <Route path='/:gameId' element={<DetailsPage />}></Route>
         <Route path='*' element={<PageNotFound />}></Route>
+        <Route path='/login' element={<Login />}></Route>
+        <Route path='/register' element={<Register />}></Route>
+        <Route path='/cart' element={<Cart />}></Route>
       </Routes>
     </>
   );
