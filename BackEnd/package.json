@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node src/config/db.js && node src/app.js",
+    "build": "webpack",
     "dev": "nodemon src/index.js"
   },
   "keywords": [],
