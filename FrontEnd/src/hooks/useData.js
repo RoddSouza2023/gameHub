@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react"
-import { apiClient } from "../services/api-client"
-import { CanceledError } from "axios"
+import { useEffect, useState } from "react";
+import { apiClient } from "../services/api-client";
+import { CanceledError } from "axios";
 
 const useData = (endpoint, requestConfig={}, deps=[]) => {
 
@@ -16,7 +16,8 @@ const useData = (endpoint, requestConfig={}, deps=[]) => {
     apiClient
       .get(endpoint, {signal: controller.signal, ...requestConfig})
       .then((res) => {
-        setData(res.data.results)
+
+        setData(res.data.games);
         setLoading(false)
       })
       .catch((err) => {
@@ -25,10 +26,11 @@ const useData = (endpoint, requestConfig={}, deps=[]) => {
         setLoading(false)
     });
 
+    //clean up function
     return () => controller.abort()
     }, deps ? [...deps] : [])
 
     return { data, error, isLoading}
 }
 
-export default useData
+export default useData;

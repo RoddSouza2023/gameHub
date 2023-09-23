@@ -1,32 +1,61 @@
 import {
   Box,
   Button,
+  CircularProgress,
+  Container,
   FormControl,
   FormLabel,
+  HStack,
   Icon,
   Input,
   InputGroup,
-  InputRightAddon,
   InputRightElement,
   Text,
 } from "@chakra-ui/react";
 import { AiOutlineEye } from "react-icons/ai";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useLogin from "../hooks/useLogin";
 
-function Login() {
+function Login({ setLoggedIn }) {
   const navigate = useNavigate();
-  const [change, setChange] = useState(true);
+  const [visibility, setVisibility] = useState(true);
+  const { handleLogin, response, error } = useLogin();
   const [userData, setUserData] = useState({
-    email: null,
-    password: null,
+    email: "",
+    password: "",
   });
+
+  useEffect(() => {
+    if (response.success) setLoggedIn(true);
+    console.log(response);
+  }, [response]);
+
+  if (response.success)
+    setTimeout(() => {
+      navigate("/");
+    }, 2000);
 
   return (
     <Box padding={10} textAlign={"center"}>
       <Text fontSize={"2xl"} marginBottom={5}>
         Login
       </Text>
+      {error && !response.success ? (
+        <Text margin={5} color={"red.500"}>
+          {error}
+        </Text>
+      ) : null}
+      {response.success && (
+        <Container centerContent>
+          <HStack marginX={"auto"}>
+            <Text margin={5} color={"green.500"}>
+              {`${response.message} Redirecting to home page`}
+            </Text>
+            <CircularProgress value={20} />
+          </HStack>
+        </Container>
+      )}
       <FormControl maxW={400} marginX={"auto"}>
         <FormLabel>Email Address</FormLabel>
         <Input
@@ -38,7 +67,7 @@ function Login() {
         <InputGroup>
           <Input
             id='password'
-            type={change ? "password" : "text"}
+            type={visibility ? "password" : "text"}
             onChange={(e) =>
               setUserData({ ...userData, password: e.target.value })
             }
@@ -47,14 +76,19 @@ function Login() {
             children={
               <Icon
                 as={AiOutlineEye}
-                onClick={() => setChange(!change)}
+                onClick={() => setVisibility(!visibility)}
                 _hover={{ cursor: "pointer" }}
-                color={change ? "none" : "green.300"}
+                color={visibility ? "none" : "green.300"}
               />
             }
           />
         </InputGroup>
-        <Button marginTop={5} onClick={() => console.log(userData)}>
+        <Button
+          marginTop={5}
+          onClick={async () => {
+            handleLogin(userData);
+          }}
+        >
           Login
         </Button>
         <Text marginTop={5}>Don't have an account? </Text>

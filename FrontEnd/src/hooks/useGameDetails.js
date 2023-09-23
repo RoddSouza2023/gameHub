@@ -1,31 +1,31 @@
-import { useEffect, useState } from "react"
-import apiClient from "../services/api-client"
+import { useState, useEffect } from "react";
+import apiClient from "../services/api-client";
 
 const useGamesDetails = (id) => {
-  const [data, setData] = useState({})
-  const [error, setError] = useState("")
-  const [isLoading, setLoading] = useState(false)
+  const [data, setData] = useState({});
+  const [error, setError] = useState("");
+  const [isLoading, setLoading] = useState(false);
 
 
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
 
     const getGames = async () => {
       try {
-        const response = await apiClient.get(`/games/${id}`)
-        setLoading(false)
-        setData(response.data)
+        const response = await apiClient.get(`/games/${id}`);
+        setLoading(false);
+        setData(response.data);
       } catch(err) {
-        setLoading(false)
-        setError(err)
+        setLoading(false);
+        setError(err);
       }
     }
 
-    getGames()
+    getGames();
   }, [])
 
 
-  return { data, error, isLoading}
+  return { data, error, isLoading};
 }
 
-export default useGamesDetails
+export default useGamesDetails;

@@ -5,12 +5,11 @@ import {
   List,
   ListItem,
   Spinner,
-} from "@chakra-ui/react"
-import useGenres from "../hooks/useGenres"
+} from "@chakra-ui/react";
+import useGenres from "../hooks/useGenres";
 import getCroppedImageUrl from "../services/image-url";
 
 function GenreList({ onSelectGenre, selectedGenre, onClose }) {
-
   const { data, isLoading, error } = useGenres();
   //renders nothing if there is an error while retrieving the genre data from server
   if (error) return null;
@@ -21,24 +20,24 @@ function GenreList({ onSelectGenre, selectedGenre, onClose }) {
     <>
       <List>
         {data.map((genre) => (
-          <ListItem key={genre.id} paddingY="5px">
+          <ListItem key={genre.id} paddingY='5px'>
             <HStack>
               <Image
-                boxSize="32px"
+                boxSize='32px'
                 borderRadius={8}
-                objectFit="cover"
+                objectFit='cover'
                 src={getCroppedImageUrl(genre.image_background)}
               />
               <Button
-                textAlign="left"
-                whiteSpace="normal"
+                textAlign='left'
+                whiteSpace='normal'
                 fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
                 onClick={() => {
-                  onSelectGenre(genre)
-                  onClose && setTimeout(() => onClose(), 200)
+                  onSelectGenre(genre);
+                  onClose && setTimeout(() => onClose(), 200);
                 }}
-                fontSize="lg"
-                variant="link"
+                fontSize='lg'
+                variant='link'
               >
                 {genre.name}
               </Button>
@@ -47,7 +46,7 @@ function GenreList({ onSelectGenre, selectedGenre, onClose }) {
         ))}
       </List>
     </>
-  )
+  );
 }
 
-export default GenreList
+export default GenreList;

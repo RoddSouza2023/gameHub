@@ -4,10 +4,26 @@ import logo from "../assets/gaming-austro.jpg";
 import ColorModeSwitch from "./ColorModeSwitch";
 import SearchInput from "./SearchInput";
 import MenuDrawer from "./MenuDrawer";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function Navbar({ onSearch, onSelectGenre, selectedGenre }) {
+function Navbar({
+  onSearch,
+  onSelectGenre,
+  selectedGenre,
+  loggedIn,
+  setLoggedIn,
+}) {
   const navigate = useNavigate();
+
+  async function logOut() {
+    // const data = await fetch("http://localhost:8080/api/v1/user/logout", {
+    //   method: "GET",
+    //   credentials: "same-origin",
+    // });
+    // const response = await data.json();
+    // setLoggedIn(response.success);
+    // window.localStorage.removeItem("isLoggedIn");
+  }
 
   return (
     <HStack padding='10px' boxShadow={"0 0 5px black"} width={"100%"}>
@@ -33,12 +49,21 @@ function Navbar({ onSearch, onSelectGenre, selectedGenre }) {
           _hover={{ cursor: "pointer" }}
           onClick={() => navigate("/cart")}
         />
-        <Text
-          onClick={() => navigate("/login")}
-          _hover={{ textDecoration: "underline", cursor: "pointer" }}
-        >
-          Login/Register
-        </Text>
+        {loggedIn ? (
+          <Text
+            _hover={{ textDecoration: "underline", cursor: "pointer" }}
+            onClick={() => logOut()}
+          >
+            Logout
+          </Text>
+        ) : (
+          <Text
+            onClick={() => navigate("/login")}
+            _hover={{ textDecoration: "underline", cursor: "pointer" }}
+          >
+            Login/Register
+          </Text>
+        )}
       </Hide>
     </HStack>
   );

@@ -6,13 +6,29 @@ import {
   Icon,
   Input,
   InputGroup,
-  InputRightAddon,
   InputRightElement,
   Text,
 } from "@chakra-ui/react";
 import { AiOutlineEye } from "react-icons/ai";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+const handleRegister = async ({ name, email, password }) => {
+  const response = await fetch(
+    "https://gamestore-twj1.onrender.com/api/v1/user/signup",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        password: password,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    }
+  );
+};
 
 function Register() {
   const navigate = useNavigate();
@@ -63,7 +79,7 @@ function Register() {
             bg={"transparent"}
           />
         </InputGroup>
-        <Button marginTop={5} onClick={() => console.log(userData)}>
+        <Button marginTop={5} onClick={() => handleRegister(userData)}>
           Register
         </Button>
         <Text marginTop={5}>Already have an account? </Text>

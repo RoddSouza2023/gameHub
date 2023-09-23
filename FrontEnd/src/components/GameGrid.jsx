@@ -1,14 +1,35 @@
-import { SimpleGrid, Text } from "@chakra-ui/react"
-import { Link } from "react-router-dom"
-import GameCard from "./GameCard"
-import GameCardSkeleton from "./GameCardSkeleton"
-import GameCardContainer from "./GameCardContainer"
-import useGames from "../hooks/useGames"
- 
-function GameGrid( { gameQuery } ) {
-  const { data, error, isLoading } = useGames(gameQuery)
-  const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-  if (error) return <Text>{error}</Text>
+import { SimpleGrid, Text } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+import GameCard from "./GameCard";
+import GameCardSkeleton from "./GameCardSkeleton";
+import GameCardContainer from "./GameCardContainer";
+import useGames from "../hooks/useGames";
+
+function GameGrid({ gameQuery }) {
+  const { data, error, isLoading } = useGames(gameQuery);
+  const skeletons = [
+    "a1",
+    "b1",
+    "c1",
+    "d1",
+    "e1",
+    "f1",
+    "g1",
+    "h1",
+    "i1",
+    "j1",
+    "k1",
+    "l1",
+    "m1",
+    "n1",
+    "o1",
+    "p1",
+    "q1",
+  ];
+
+  if (error) {
+    return <Text>{error}</Text>;
+  }
 
   return (
     <SimpleGrid
@@ -22,15 +43,15 @@ function GameGrid( { gameQuery } ) {
             <GameCardSkeleton />
           </GameCardContainer>
         ))}
-      {data.map((game) => (
-        <GameCardContainer key={game.id}>
+      {data?.map((game) => (
+        <GameCardContainer key={game._id}>
           <Link to={`/${game.id}`}>
-            <GameCard game={ game } />
+            <GameCard game={game} />
           </Link>
         </GameCardContainer>
       ))}
     </SimpleGrid>
-  )
+  );
 }
 
-export default GameGrid
+export default GameGrid;
