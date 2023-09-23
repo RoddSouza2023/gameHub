@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import apiClient from "../services/api-client";
+import { apiClient } from "../services/api-client";
 
-const useGamesDetails = (id) => {
+const useGamesDetails = (slug) => {
   const [data, setData] = useState({});
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
@@ -12,7 +12,7 @@ const useGamesDetails = (id) => {
 
     const getGames = async () => {
       try {
-        const response = await apiClient.get(`/games/${id}`);
+        const response = await apiClient.get(`/game/${slug}`);
         setLoading(false);
         setData(response.data);
       } catch(err) {

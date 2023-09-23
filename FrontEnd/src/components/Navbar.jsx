@@ -6,23 +6,13 @@ import SearchInput from "./SearchInput";
 import MenuDrawer from "./MenuDrawer";
 import { useNavigate } from "react-router-dom";
 
-function Navbar({
-  onSearch,
-  onSelectGenre,
-  selectedGenre,
-  loggedIn,
-  setLoggedIn,
-}) {
+function Navbar({ onSearch, onSelectGenre, selectedGenre }) {
   const navigate = useNavigate();
 
   async function logOut() {
-    // const data = await fetch("http://localhost:8080/api/v1/user/logout", {
-    //   method: "GET",
-    //   credentials: "same-origin",
-    // });
-    // const response = await data.json();
-    // setLoggedIn(response.success);
-    // window.localStorage.removeItem("isLoggedIn");
+    window.localStorage.removeItem("isLoggedIn");
+    window.localStorage.removeItem("accessToken");
+    navigate("/");
   }
 
   return (
@@ -49,7 +39,7 @@ function Navbar({
           _hover={{ cursor: "pointer" }}
           onClick={() => navigate("/cart")}
         />
-        {loggedIn ? (
+        {localStorage.isLoggedIn ? (
           <Text
             _hover={{ textDecoration: "underline", cursor: "pointer" }}
             onClick={() => logOut()}

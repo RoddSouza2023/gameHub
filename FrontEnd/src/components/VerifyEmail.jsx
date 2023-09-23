@@ -15,30 +15,25 @@ import {
 import { AiOutlineEye } from "react-icons/ai";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useLogin from "../hooks/useLogin";
+import useVerify from "../hooks/useVerify";
 
-function Login() {
+function VerifyEmail() {
   const navigate = useNavigate();
   const [visibility, setVisibility] = useState(true);
-  const { handleLogin, response, error } = useLogin();
+  const { handleVerify, response, error } = useVerify();
   const [userData, setUserData] = useState({
     email: "",
-    password: "",
+    otp: "",
   });
 
   useEffect(() => {
-    if (response.success) window.localStorage.setItem("isLoggedIn", true);
+    if (response.success);
   }, [response]);
-
-  if (response.success)
-    setTimeout(() => {
-      navigate("/");
-    }, 2000);
 
   return (
     <Box padding={10} textAlign={"center"}>
       <Text fontSize={"2xl"} marginBottom={5}>
-        Login
+        Verify Email
       </Text>
       {error && !response.success ? (
         <Text margin={5} color={"red.500"}>
@@ -49,9 +44,8 @@ function Login() {
         <Container centerContent>
           <HStack marginX={"auto"}>
             <Text margin={5} color={"green.500"}>
-              {`${response.message} Redirecting to home page`}
+              {`${response.message}`}
             </Text>
-            <CircularProgress size={5} isIndeterminate />
           </HStack>
         </Container>
       )}
@@ -62,14 +56,12 @@ function Login() {
           marginBottom={5}
           onChange={(e) => setUserData({ ...userData, email: e.target.value })}
         />
-        <FormLabel>Password</FormLabel>
+        <FormLabel>OTP Token</FormLabel>
         <InputGroup>
           <Input
             id='password'
             type={visibility ? "password" : "text"}
-            onChange={(e) =>
-              setUserData({ ...userData, password: e.target.value })
-            }
+            onChange={(e) => setUserData({ ...userData, otp: e.target.value })}
           />
           <InputRightElement
             children={
@@ -85,13 +77,12 @@ function Login() {
         <Button
           marginTop={5}
           onClick={async () => {
-            handleLogin(userData);
+            handleVerify(userData);
           }}
         >
-          Login
+          Verify
         </Button>
-        <Text marginTop={5}>Don't have an account? </Text>
-        <Container centerContent>
+        <Container marginY={5} centerContent>
           <HStack>
             <Text
               onClick={() => navigate("/register")}
@@ -103,16 +94,16 @@ function Login() {
             >
               Register
             </Text>
-            <Text>or</Text>
+            <Text>/</Text>
             <Text
-              onClick={() => navigate("/verify")}
+              onClick={() => navigate("/login")}
               _hover={{
                 color: "lightblue",
                 cursor: "pointer",
                 textDecoration: "underline",
               }}
             >
-              Verify Email
+              Login
             </Text>
           </HStack>
         </Container>
@@ -121,4 +112,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default VerifyEmail;

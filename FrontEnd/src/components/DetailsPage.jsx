@@ -2,47 +2,23 @@ import {
   Box,
   Container,
   Flex,
-  Grid,
-  GridItem,
   VStack,
   Icon,
   Text,
   Button,
   Center,
   Show,
-  AspectRatio,
 } from "@chakra-ui/react";
-import {
-  FaWindows,
-  FaPlaystation,
-  FaXbox,
-  FaApple,
-  FaLinux,
-  FaAndroid,
-} from "react-icons/fa";
-import { MdPhoneIphone } from "react-icons/md";
-import { SiNintendo } from "react-icons/si";
-import { BsGlobe } from "react-icons/bs";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { iconMap } from "./PlatformIconList";
-import VideosCarousel from "./VideosCarousel";
-import { Carousel } from "react-responsive-carousel";
-
-//   pc: FaWindows,
-//   playstation: FaPlaystation,
-//   xbox: FaXbox,
-//   nintendo: SiNintendo,
-//   mac: FaApple,
-//   linux: FaLinux,
-//   android: FaAndroid,
-//   ios: MdPhoneIphone,
-//   web: BsGlobe,
-// };
+import ScreenshotCarousel from "./ScreenshotCarousel";
+import useGamesDetails from "../hooks/useGameDetails";
 
 function DetailsPage() {
   const [showText, setShowText] = useState(false);
-  const { gameId } = useParams();
+  const { slug } = useParams();
+  const { data, error, isLoading } = useGamesDetails(slug);
   const game = {
     id: 3498,
     slug: "grand-theft-auto-v",
@@ -639,139 +615,46 @@ function DetailsPage() {
       "Rockstar Games went bigger, since their previous installment of the series. You get the complicated and realistic world-building from Liberty City of GTA4 in the setting of lively and diverse Los Santos, from an old fan favorite GTA San Andreas. 561 different vehicles (including every transport you can operate) and the amount is rising with every update. \nSimultaneous storytelling from three unique perspectives: \nFollow Michael, ex-criminal living his life of leisure away from the past, Franklin, a kid that seeks the better future, and Trevor, the exact past Michael is trying to run away from. \nGTA Online will provide a lot of additional challenge even for the experienced players, coming fresh from the story mode. Now you will have other players around that can help you just as likely as ruin your mission. Every GTA mechanic up to date can be experienced by players through the unique customizable character, and community content paired with the leveling system tends to keep everyone busy and engaged.\n\nEspañol\nRockstar Games se hizo más grande desde su entrega anterior de la serie. Obtienes la construcción del mundo complicada y realista de Liberty City de GTA4 en el escenario de Los Santos, un viejo favorito de los fans, GTA San Andreas. 561 vehículos diferentes (incluidos todos los transportes que puede operar) y la cantidad aumenta con cada actualización.\nNarración simultánea desde tres perspectivas únicas:\nSigue a Michael, ex-criminal que vive su vida de ocio lejos del pasado, Franklin, un niño que busca un futuro mejor, y Trevor, el pasado exacto del que Michael está tratando de huir.\nGTA Online proporcionará muchos desafíos adicionales incluso para los jugadores experimentados, recién llegados del modo historia. Ahora tendrás otros jugadores cerca que pueden ayudarte con la misma probabilidad que arruinar tu misión. Los jugadores pueden experimentar todas las mecánicas de GTA actualizadas a través del personaje personalizable único, y el contenido de la comunidad combinado con el sistema de nivelación tiende a mantener a todos ocupados y comprometidos.",
   };
 
-  const movies = [
-    {
-      id: 16228,
-      name: "GTA Online: Smuggler's Run Trailer",
-      preview:
-        "https://media.rawg.io/media/movies/d8a/d8a61a3a12e52114afdbc28f2c813f5c.jpg",
-      data: {
-        480: "https://steamcdn-a.akamaihd.net/steam/apps/256693661/movie480.mp4",
-        max: "https://steamcdn-a.akamaihd.net/steam/apps/256693661/movie_max.mp4",
-      },
-    },
-    {
-      id: 16227,
-      name: "GTA Online: Gunrunning Trailer",
-      preview:
-        "https://media.rawg.io/media/movies/80c/80c2eeb2478d31291dfb5a5fd5a45f2e.jpg",
-      data: {
-        480: "https://steamcdn-a.akamaihd.net/steam/apps/256686767/movie480.mp4",
-        max: "https://steamcdn-a.akamaihd.net/steam/apps/256686767/movie_max.mp4",
-      },
-    },
-    {
-      id: 16226,
-      name: "GTA Online: Tiny Racers Trailer",
-      preview:
-        "https://media.rawg.io/media/movies/7c9/7c9f84f3ec31106944a04128287fdd6a.jpg",
-      data: {
-        480: "https://steamcdn-a.akamaihd.net/steam/apps/256683844/movie480.mp4",
-        max: "https://steamcdn-a.akamaihd.net/steam/apps/256683844/movie_max.mp4",
-      },
-    },
-    {
-      id: 16225,
-      name: "GTA Online Cunning Stunts: Special Vehicle Circuit Trailer",
-      preview:
-        "https://media.rawg.io/media/movies/d6e/d6e1deb16c4275e8f5769528780e03ac.jpg",
-      data: {
-        480: "https://steamcdn-a.akamaihd.net/steam/apps/256681415/movie480.mp4",
-        max: "https://steamcdn-a.akamaihd.net/steam/apps/256681415/movie_max.mp4",
-      },
-    },
-    {
-      id: 16224,
-      name: "GTA Online: Import/Export",
-      preview:
-        "https://media.rawg.io/media/movies/1c1/1c1429a6557185326c1d8c03a6f325c0.jpg",
-      data: {
-        480: "https://steamcdn-a.akamaihd.net/steam/apps/256676519/movie480.mp4",
-        max: "https://steamcdn-a.akamaihd.net/steam/apps/256676519/movie_max.mp4",
-      },
-    },
-    {
-      id: 16223,
-      name: "GTA Online: Deadline",
-      preview:
-        "https://media.rawg.io/media/movies/f80/f8051b0eb479fa1785c1e04c8e54e322.jpg",
-      data: {
-        480: "https://steamcdn-a.akamaihd.net/steam/apps/256674210/movie480.mp4",
-        max: "https://steamcdn-a.akamaihd.net/steam/apps/256674210/movie_max.mp4",
-      },
-    },
-    {
-      id: 16222,
-      name: "GTA Online: Bikers Trailer",
-      preview:
-        "https://media.rawg.io/media/movies/955/9556607dec02bf324c87aa33bba2ed8e.jpg",
-      data: {
-        480: "https://steamcdn-a.akamaihd.net/steam/apps/256672028/movie480.mp4",
-        max: "https://steamcdn-a.akamaihd.net/steam/apps/256672028/movie_max.mp4",
-      },
-    },
-    {
-      id: 16221,
-      name: "GTA Online: Cunning Stunts Trailer",
-      preview:
-        "https://media.rawg.io/media/movies/66e/66e78864cf57faa2a52cfab4eb6830a4.jpg",
-      data: {
-        480: "https://steamcdn-a.akamaihd.net/steam/apps/256666646/movie480.mp4",
-        max: "https://steamcdn-a.akamaihd.net/steam/apps/256666646/movie_max.mp4",
-      },
-    },
-  ];
-
   return (
-    <Container marginLeft={"auto"}>
-      <Grid
-        templateAreas={`"details media" "similar similar" "creators creators"`}
-        templateColumns={"320px 320px"}
-        templateRows={"1fr 1fr 1fr"}
-      >
-        <GridItem area={"details"}>
-          <VStack>
-            <Flex marginY={5} alignSelf={"baseline"}>
-              <Box>
-                {game.parent_platforms.map(({ platform }) => (
-                  <Icon
-                    key={platform.id}
-                    as={iconMap[platform.slug]}
-                    color={"gray.100"}
-                    marginX={1}
-                  ></Icon>
-                ))}
-              </Box>
-              <Text marginX={5}>Average Playtime: {game.playtime}</Text>
-            </Flex>
-            <Text fontSize={40}>{game.name}</Text>
-            <Flex alignSelf={"baseline"} alignContent={"flex-start"}>
-              <Button marginRight={2}>Cart</Button>
-              <Button marginRight={2}>Wishlist</Button>
-              <Center>
-                <Text>
-                  {game.rating} / {game.rating_top}
-                </Text>
-              </Center>
-            </Flex>
-            <Box marginY={10}>
-              <Show breakpoint=''>
-                {showText ? (
-                  <Text>{game.description_raw}</Text>
-                ) : (
-                  <Text noOfLines={5}>{game.description_raw}</Text>
-                )}
-                <Button onClick={() => setShowText(!showText)}>
-                  Show {showText ? "Less" : "More"}
-                </Button>
-              </Show>
-            </Box>
-          </VStack>
-        </GridItem>
-        <GridItem area={"media"}>
-          <VideosCarousel />
-        </GridItem>
-      </Grid>
+    <Container>
+      <VStack>
+        <Flex marginY={5} alignSelf={"baseline"}>
+          <Box>
+            {game.parent_platforms.map(({ platform }) => (
+              <Icon
+                key={platform.id}
+                as={iconMap[platform.slug]}
+                color={"gray.100"}
+                marginX={1}
+              ></Icon>
+            ))}
+          </Box>
+          <Text marginX={5}>Average Playtime: {game.playtime}</Text>
+        </Flex>
+        <Text fontSize={40}>{game.name}</Text>
+        <Flex alignSelf={"baseline"} alignContent={"flex-start"}>
+          <Button marginRight={2}>Cart</Button>
+          <Button marginRight={2}>Wishlist</Button>
+          <Center>
+            <Text>
+              {game.rating} / {game.rating_top}
+            </Text>
+          </Center>
+        </Flex>
+        <ScreenshotCarousel screenshots={data.game?.short_screenshots} />
+        <Box marginY={10}>
+          <Show breakpoint=''>
+            {showText ? (
+              <Text>{game.description_raw}</Text>
+            ) : (
+              <Text noOfLines={5}>{game.description_raw}</Text>
+            )}
+            <Button marginY={5} onClick={() => setShowText(!showText)}>
+              Show {showText ? "Less" : "More"}
+            </Button>
+          </Show>
+        </Box>
+      </VStack>
     </Container>
   );
 }

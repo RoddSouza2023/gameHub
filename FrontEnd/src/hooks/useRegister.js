@@ -1,13 +1,14 @@
 import { useState } from "react";
 
-function useLogin() {
+function useRegister() {
   const [response, setResponse] = useState({});
   const [error, setError] = useState(null);
 
-  const handleLogin = async ({ email, password }) => {
-    const data = await fetch(`${import.meta.env.VITE_API_URL}/user`, {
+  const handleRegister = async ({ name, email, password }) => {
+    const data = await fetch(`${import.meta.env.VITE_API_URL}/user/signup`, {
       method: "POST",
       body: JSON.stringify({
+        name: name,
         email: email,
         password: password,
       }),
@@ -20,14 +21,11 @@ function useLogin() {
       setError(res.error);
       return;
     };
-
-    window.localStorage.setItem("accessToken", res.user.token);
-    window.localStorage.setItem("isLoggedIn", true);
     
     setResponse(res);
   }
 
-  return { handleLogin, response, error }
+  return { handleRegister, response, error }
 }
 
-export default useLogin;
+export default useRegister;
