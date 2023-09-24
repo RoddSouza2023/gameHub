@@ -13,6 +13,7 @@ function GameCard({ game }) {
       height='100%'
       maxW={"inherit"}
       onClick={() => navigate(`/games/${game.slug}`)}
+      _hover={{ cursor: "pointer" }}
     >
       <Image src={getCroppedImageUrl(game.background_image)}></Image>
       <CardBody>

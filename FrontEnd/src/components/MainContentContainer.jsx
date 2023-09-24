@@ -1,14 +1,37 @@
-import { Box, Flex, IconButton } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Container,
+  Flex,
+  HStack,
+  IconButton,
+  Text,
+} from "@chakra-ui/react";
 import GameGrid from "./GameGrid";
 import PlatformSelector from "./PlatformSelector";
 import SortSelector from "./SortSelector";
 import GameHeading from "./GameHeading";
+import useGames from "../hooks/useGames";
 import { RepeatIcon } from "@chakra-ui/icons";
+import { useState } from "react";
+import GamesPerPage from "./GamesPerPage";
 
-function MainContentContainer({ setGameQuery, gameQuery }) {
+function MainContentContainer({
+  setGameQuery,
+  gameQuery,
+  currentPage,
+  setCurrentPage,
+}) {
+  const [gamesPerPage, setGamesPerPage] = useState(20);
+  const { data, error, isLoading } = useGames(gameQuery);
   const onSelectPlatform = (platform) => {
     setGameQuery({ ...gameQuery, platform });
   };
+
+  const lastPostIndex = currentPage * gamesPerPage;
+  const firstPostIndex = lastPostIndex - gamesPerPage;
+  const currentGames = data.slice(firstPostIndex, lastPostIndex);
+  const maxPageNumber = Math.ceil(data.length / gamesPerPage);
 
   return (
     <>
@@ -19,9 +42,11 @@ function MainContentContainer({ setGameQuery, gameQuery }) {
             <PlatformSelector
               selectedPlatform={gameQuery.platform}
               onSelectPlatform={onSelectPlatform}
+              setCurrentPage={setCurrentPage}
             />
           </Box>
           <SortSelector
+            setCurrentPage={setCurrentPage}
             sortOrder={gameQuery.sortOrder}
             onSelectSortOrder={(sortOrder) =>
               setGameQuery({ ...gameQuery, sortOrder })
@@ -38,8 +63,36 @@ function MainContentContainer({ setGameQuery, gameQuery }) {
             ></IconButton>
           )}
         </Flex>
+        <GamesPerPage
+          gamesPerPage={gamesPerPage}
+          setGamesPerPage={setGamesPerPage}
+        />
       </Box>
-      <GameGrid gameQuery={gameQuery} />
+      <GameGrid
+        data={currentGames}
+        error={error}
+        isLoading={isLoading}
+        gameQuery={gameQuery}
+      />
+      <Container marginY={5} centerContent>
+        <HStack>
+          <Button
+            isDisabled={currentPage === 1}
+            onClick={() => setCurrentPage(currentPage - 1)}
+          >
+            Prev
+          </Button>
+          <Text marginX={5} fontWeight={"bold"}>
+            {currentPage} of {maxPageNumber}
+          </Text>
+          <Button
+            isDisabled={currentPage === maxPageNumber}
+            onClick={() => setCurrentPage(currentPage + 1)}
+          >
+            Next
+          </Button>
+        </HStack>
+      </Container>
     </>
   );
 }

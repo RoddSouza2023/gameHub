@@ -13,7 +13,7 @@ function ScreenshotCarousel({ screenshots }) {
         interval='5000'
         transitionTime='1'
       >
-        {screenshots.map((shot) => (
+        {screenshots?.map((shot) => (
           <div key={shot.id}>
             <img src={shot.image}></img>
           </div>

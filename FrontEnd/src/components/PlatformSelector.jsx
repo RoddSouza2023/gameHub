@@ -2,7 +2,11 @@ import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
 import usePlatforms from "../hooks/usePlatforms";
 
-function PlatformSelector({ onSelectPlatform, selectedPlatform }) {
+function PlatformSelector({
+  onSelectPlatform,
+  selectedPlatform,
+  setCurrentPage,
+}) {
   const { data, error } = usePlatforms();
 
   if (error) return null;
@@ -17,6 +21,7 @@ function PlatformSelector({ onSelectPlatform, selectedPlatform }) {
           <MenuItem
             onClick={() => {
               onSelectPlatform(platform);
+              setCurrentPage(1);
             }}
             key={platform.id}
           >

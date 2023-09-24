@@ -1,57 +1,41 @@
-import { Box, Container, Flex, HStack, Icon, Text } from "@chakra-ui/react";
-import { useState } from "react";
+import {
+  Box,
+  Container,
+  Flex,
+  HStack,
+  Icon,
+  Image,
+  Text,
+} from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import {
   AiOutlineDelete,
   AiOutlinePlusCircle,
   AiOutlineMinusCircle,
 } from "react-icons/ai";
-
-const items = [
-  {
-    id: 1,
-    name: "product1",
-    price: 24.0,
-    quantity: 1,
-  },
-  {
-    id: 2,
-    name: "product2",
-    price: 25.0,
-    quantity: 1,
-  },
-  {
-    id: 3,
-    name: "product3",
-    price: 26.0,
-    quantity: 1,
-  },
-];
+import useCart from "../hooks/useCart";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
-  const [products, setProducts] = useState(items);
+  const token = localStorage?.accessToken || null;
+  const navigate = useNavigate();
+  const [products, setProducts] = useState([]);
+  const {
+    handleCartDeleteItem,
+    handleCartGetItems,
+    handleCartUpdateQuantity,
+    response,
+    error,
+  } = useCart(token);
 
-  const incrementQuantity = (id) => {
-    const prod = products.map((p) => {
-      if (p.id === id) {
-        const quant = p.quantity + 1;
-        return { ...p, quantity: quant };
-      }
-      return p;
-    });
-    return prod;
-  };
-
-  const decrementQuantity = (id) => {
-    const prod = products.map((p) => {
-      if (p.id === id) {
-        let quant = p.quantity - 1;
-        if (quant < 1) quant = p.quantity;
-        return { ...p, quantity: quant };
-      }
-      return p;
-    });
-    return prod;
-  };
+  useEffect(() => {
+    if (response.success) {
+      setProducts(response.cart);
+      console.log("UPDATED PRODUCTS: " + products);
+    } else {
+      if (token) handleCartGetItems();
+    }
+  }, [response, products]);
 
   return (
     <Container paddingY={10} centerContent>
@@ -59,7 +43,7 @@ function Cart() {
         Cart
       </Text>
       <Box border={"inset 1px black"} padding={5} borderRadius={10}>
-        {items.map((product, i) => (
+        {products?.map((product, i) => (
           <Box
             key={product.id}
             margin={3}
@@ -68,23 +52,36 @@ function Cart() {
             padding={2}
           >
             <HStack justify={"space-between"}>
+              <Image
+                align={"left"}
+                boxSize={"80px"}
+                borderRadius={10}
+                objectFit={"cover"}
+                src={product.image}
+                _hover={{ cursor: "pointer" }}
+                onClick={() => navigate(`/games/${product.slug}`)}
+              />
               <Box>
                 <Text>{product.name}</Text>
-                <Text>{product.price * products[i].quantity}</Text>
+                <Text>
+                  {parseInt(product.price) * parseInt(products[i]?.quantity)}
+                </Text>
               </Box>
               <HStack>
                 <HStack marginRight={5}>
                   <Icon
                     onClick={() => {
-                      setProducts(decrementQuantity(product.id));
+                      const quantity = product.quantity - 1;
+                      handleCartUpdateQuantity(product.id, quantity);
                     }}
                     as={AiOutlineMinusCircle}
                     _hover={{ cursor: "pointer", color: "red.500" }}
                   />
-                  <Text fontSize={"sm"}>{products[i].quantity}</Text>
+                  <Text fontSize={"sm"}>{products[i]?.quantity}</Text>
                   <Icon
                     onClick={() => {
-                      setProducts(incrementQuantity(product.id));
+                      const quantity = product.quantity + 1;
+                      handleCartUpdateQuantity(product.id, quantity);
                     }}
                     as={AiOutlinePlusCircle}
                     _hover={{ cursor: "pointer", color: "green.500" }}
@@ -94,6 +91,7 @@ function Cart() {
                   color={"red.500"}
                   as={AiOutlineDelete}
                   _hover={{ cursor: "pointer" }}
+                  onClick={() => handleCartDeleteItem(product.id)}
                 />
               </HStack>
             </HStack>

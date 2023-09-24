@@ -1,8 +1,13 @@
 import { Grid, GridItem, Heading, Show } from "@chakra-ui/react";
-import GenreList from "./GenreList";
+import { useState } from "react";
 import MainContentContainer from "./MainContentContainer";
+import GenreList from "./GenreList";
 
 function MainPage({ gameQuery, setGameQuery, onSelectGenre }) {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  if (!localStorage.guest_cart) window.localStorage.setItem("guest_cart", []);
+
   return (
     <>
       <Grid
@@ -26,6 +31,7 @@ function MainPage({ gameQuery, setGameQuery, onSelectGenre }) {
               Genres
             </Heading>
             <GenreList
+              setCurrentPage={setCurrentPage}
               onClose={null}
               selectedGenre={gameQuery.genre}
               onSelectGenre={onSelectGenre}
@@ -34,6 +40,8 @@ function MainPage({ gameQuery, setGameQuery, onSelectGenre }) {
         </Show>
         <GridItem area='main'>
           <MainContentContainer
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
             setGameQuery={setGameQuery}
             gameQuery={gameQuery}
           />

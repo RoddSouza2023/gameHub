@@ -4,8 +4,7 @@ import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
 import useGames from "../hooks/useGames";
 
-function GameGrid({ gameQuery }) {
-  const { data, error, isLoading } = useGames(gameQuery);
+function GameGrid({ data, error, isLoading, gameQuery }) {
   const skeletons = [
     "a1",
     "b1",
