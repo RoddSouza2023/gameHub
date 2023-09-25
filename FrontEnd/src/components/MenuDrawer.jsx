@@ -20,7 +20,7 @@ import GenreList from "./GenreList";
 import { useLocation, useNavigate } from "react-router-dom";
 import ColorModeSwitch from "./ColorModeSwitch";
 
-function MenuDrawer({ onSelectGenre, selectedGenre }) {
+function MenuDrawer({ onSelectGenre, selectedGenre, setCurrentPage }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef();
   const { pathname } = useLocation();
@@ -64,6 +64,7 @@ function MenuDrawer({ onSelectGenre, selectedGenre }) {
                   <ColorModeSwitch />
                 </HStack>
                 <GenreList
+                  setCurrentPage={setCurrentPage}
                   onClose={onClose}
                   selectedGenre={selectedGenre}
                   onSelectGenre={onSelectGenre}

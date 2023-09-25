@@ -5,13 +5,21 @@ import ColorModeSwitch from "./ColorModeSwitch";
 import SearchInput from "./SearchInput";
 import MenuDrawer from "./MenuDrawer";
 import { useNavigate } from "react-router-dom";
+import { pulse } from "../animations/navbarAnimation";
 
-function Navbar({ onSearch, onSelectGenre, selectedGenre }) {
+function Navbar({
+  onSearch,
+  onSelectGenre,
+  selectedGenre,
+  setCurrentPage,
+  setIsLoggedIn,
+}) {
   const navigate = useNavigate();
 
   async function logOut() {
-    window.localStorage.removeItem("isLoggedIn");
-    window.localStorage.removeItem("accessToken");
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("accessToken");
+    setIsLoggedIn(false);
     navigate("/");
   }
 
@@ -19,7 +27,13 @@ function Navbar({ onSearch, onSelectGenre, selectedGenre }) {
     <HStack padding='10px' boxShadow={"0 0 5px black"} width={"100%"}>
       <Image
         onClick={() => navigate("/")}
-        _hover={{ cursor: "pointer", boxShadow: "0 0 5px white" }}
+        _hover={{
+          cursor: "pointer",
+          boxShadow: "0 0 5px white",
+          zIndex: 9,
+          transform: "scale(110%)",
+        }}
+        animation={`${pulse} 2s infinite`}
         src={logo}
         boxSize='60px'
         borderRadius={15}
@@ -28,6 +42,7 @@ function Navbar({ onSearch, onSelectGenre, selectedGenre }) {
         <MenuDrawer
           onSelectGenre={onSelectGenre}
           selectedGenre={selectedGenre}
+          setCurrentPage={setCurrentPage}
         />
       </Show>
       <SearchInput onSearch={onSearch} />

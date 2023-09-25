@@ -17,7 +17,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useLogin from "../hooks/useLogin";
 
-function Login() {
+function Login({ setIsLoggedIn }) {
   const navigate = useNavigate();
   const [visibility, setVisibility] = useState(true);
   const { handleLogin, response, error } = useLogin();
@@ -27,7 +27,10 @@ function Login() {
   });
 
   useEffect(() => {
-    if (response.success) window.localStorage.setItem("isLoggedIn", true);
+    if (response.success) {
+      localStorage.setItem("isLoggedIn", true);
+      setIsLoggedIn(response.success);
+    }
   }, [response]);
 
   if (response.success)

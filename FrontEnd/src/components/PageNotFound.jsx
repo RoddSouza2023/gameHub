@@ -1,5 +1,6 @@
 import { Box, Container, Image, Text } from "@chakra-ui/react";
 import React from "react";
+import CustomLink from "./CustomLink";
 
 function PageNotFound() {
   return (
@@ -15,7 +16,8 @@ function PageNotFound() {
           boxShadow={"0 0 20px black"}
         />
         <Text fontSize={20} fontFamily={"Chalkduster, fantasy"}>
-          Please go back to home page or another valid domain.
+          Please go back to <CustomLink to={"/"}>home page</CustomLink> or
+          another valid domain.
         </Text>
       </Box>
     </Container>

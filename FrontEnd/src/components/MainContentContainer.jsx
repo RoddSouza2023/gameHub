@@ -6,6 +6,7 @@ import {
   HStack,
   IconButton,
   Text,
+  Hide,
 } from "@chakra-ui/react";
 import GameGrid from "./GameGrid";
 import PlatformSelector from "./PlatformSelector";
@@ -35,64 +36,71 @@ function MainContentContainer({
 
   return (
     <>
-      <Box paddingLeft={2}>
-        <GameHeading gameQuery={gameQuery} />
-        <Flex marginBottom={5}>
-          <Box marginRight={5}>
-            <PlatformSelector
-              selectedPlatform={gameQuery.platform}
-              onSelectPlatform={onSelectPlatform}
-              setCurrentPage={setCurrentPage}
+      {
+        <>
+          <Box paddingLeft={2}>
+            <GameHeading gameQuery={gameQuery} />
+            <Flex marginBottom={5}>
+              <Box marginRight={5}>
+                <PlatformSelector
+                  selectedPlatform={gameQuery.platform}
+                  onSelectPlatform={onSelectPlatform}
+                  setCurrentPage={setCurrentPage}
+                />
+              </Box>
+              <SortSelector
+                setCurrentPage={setCurrentPage}
+                sortOrder={gameQuery.sortOrder}
+                onSelectSortOrder={(sortOrder) =>
+                  setGameQuery({ ...gameQuery, sortOrder })
+                }
+              />
+              {(gameQuery.genre ||
+                gameQuery.platform ||
+                gameQuery.sortOrder) && (
+                <IconButton
+                  marginLeft={3}
+                  icon={<RepeatIcon />}
+                  background='unset'
+                  onClick={() => {
+                    setGameQuery({
+                      platform: null,
+                      genre: null,
+                      sortOrder: null,
+                    });
+                  }}
+                ></IconButton>
+              )}
+            </Flex>
+            <GamesPerPage
+              gamesPerPage={gamesPerPage}
+              setGamesPerPage={setGamesPerPage}
             />
           </Box>
-          <SortSelector
-            setCurrentPage={setCurrentPage}
-            sortOrder={gameQuery.sortOrder}
-            onSelectSortOrder={(sortOrder) =>
-              setGameQuery({ ...gameQuery, sortOrder })
-            }
-          />
-          {(gameQuery.genre || gameQuery.platform || gameQuery.sortOrder) && (
-            <IconButton
-              marginLeft={3}
-              icon={<RepeatIcon />}
-              background='unset'
-              onClick={() => {
-                setGameQuery({ platform: null, genre: null, sortOrder: null });
-              }}
-            ></IconButton>
-          )}
-        </Flex>
-        <GamesPerPage
-          gamesPerPage={gamesPerPage}
-          setGamesPerPage={setGamesPerPage}
-        />
-      </Box>
-      <GameGrid
-        data={currentGames}
-        error={error}
-        isLoading={isLoading}
-        gameQuery={gameQuery}
-      />
-      <Container marginY={5} centerContent>
-        <HStack>
-          <Button
-            isDisabled={currentPage === 1}
-            onClick={() => setCurrentPage(currentPage - 1)}
-          >
-            Prev
-          </Button>
-          <Text marginX={5} fontWeight={"bold"}>
-            {currentPage} of {maxPageNumber}
-          </Text>
-          <Button
-            isDisabled={currentPage === maxPageNumber}
-            onClick={() => setCurrentPage(currentPage + 1)}
-          >
-            Next
-          </Button>
-        </HStack>
-      </Container>
+          <GameGrid data={currentGames} error={error} isLoading={isLoading} />
+          <Container marginY={5} centerContent>
+            {maxPageNumber > 1 && (
+              <HStack>
+                <Button
+                  isDisabled={currentPage === 1}
+                  onClick={() => setCurrentPage(currentPage - 1)}
+                >
+                  Prev
+                </Button>
+                <Text marginX={5} fontWeight={"bold"}>
+                  {currentPage} of {maxPageNumber}
+                </Text>
+                <Button
+                  isDisabled={currentPage === maxPageNumber}
+                  onClick={() => setCurrentPage(currentPage + 1)}
+                >
+                  Next
+                </Button>
+              </HStack>
+            )}
+          </Container>
+        </>
+      }
     </>
   );
 }

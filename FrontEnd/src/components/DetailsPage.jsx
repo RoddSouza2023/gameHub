@@ -6,7 +6,6 @@ import {
   Icon,
   Text,
   Button,
-  Center,
   Show,
   HStack,
 } from "@chakra-ui/react";
@@ -16,11 +15,13 @@ import { iconMap } from "./PlatformIconList";
 import ScreenshotCarousel from "./ScreenshotCarousel";
 import useGamesDetails from "../hooks/useGameDetails";
 import { BsArrowBarLeft } from "react-icons/bs";
-import useCart from "../hooks/useCart";
+import useUpdateCart from "../hooks/useUpdateCart";
+import useLocalCart from "../hooks/useLocalCart";
 
 function DetailsPage() {
   const token = localStorage?.accessToken || null;
-  const { handleCartAddItems } = useCart(token);
+  const { addItemToCart } = useLocalCart();
+  const { handleCartAddItems } = useUpdateCart(token);
   const [showText, setShowText] = useState(false);
   const { slug } = useParams();
   const { data, error, isLoading } = useGamesDetails(slug);
@@ -40,7 +41,6 @@ function DetailsPage() {
               <Icon
                 key={platform.id}
                 as={iconMap[platform.slug]}
-                color={"gray.100"}
                 marginX={1}
               ></Icon>
             ))}
@@ -55,6 +55,7 @@ function DetailsPage() {
             <Button
               marginRight={2}
               onClick={() => {
+                addItemToCart(game);
                 handleCartAddItems(game);
               }}
             >

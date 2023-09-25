@@ -1,11 +1,14 @@
 import { Grid, GridItem, Heading, Show } from "@chakra-ui/react";
-import { useState } from "react";
 import MainContentContainer from "./MainContentContainer";
 import GenreList from "./GenreList";
 
-function MainPage({ gameQuery, setGameQuery, onSelectGenre }) {
-  const [currentPage, setCurrentPage] = useState(1);
-
+function MainPage({
+  gameQuery,
+  setGameQuery,
+  onSelectGenre,
+  currentPage,
+  setCurrentPage,
+}) {
   if (!localStorage.guest_cart) window.localStorage.setItem("guest_cart", []);
 
   return (
