@@ -52,10 +52,16 @@ function MenuDrawer({ onSelectGenre, selectedGenre, setCurrentPage }) {
                   <Icon
                     as={AiOutlineShoppingCart}
                     _hover={{ cursor: "pointer" }}
-                    onClick={() => navigate("/cart")}
+                    onClick={() => {
+                      navigate("/cart");
+                      onClose(true);
+                    }}
                   />
                   <Text
-                    onClick={() => navigate("/login")}
+                    onClick={() => {
+                      navigate("/login");
+                      onClose(true);
+                    }}
                     _hover={{ textDecoration: "underline", cursor: "pointer" }}
                     marginX={2}
                   >
@@ -92,7 +98,20 @@ function MenuDrawer({ onSelectGenre, selectedGenre, setCurrentPage }) {
             <DrawerOverlay />
             <DrawerContent>
               <DrawerCloseButton />
-              <DrawerHeader boxShadow={"0 0 5px black"}>Menu</DrawerHeader>
+              <DrawerHeader boxShadow={"0 0 5px black"}>
+                <HStack>
+                  <Text>Menu /</Text>{" "}
+                  <Text
+                    onClick={() => {
+                      navigate("/");
+                      onClose(true);
+                    }}
+                    _hover={{ textDecoration: "underline", cursor: "pointer" }}
+                  >
+                    Home
+                  </Text>
+                </HStack>
+              </DrawerHeader>
 
               <DrawerBody>
                 <HStack
@@ -103,10 +122,16 @@ function MenuDrawer({ onSelectGenre, selectedGenre, setCurrentPage }) {
                   <Icon
                     as={AiOutlineShoppingCart}
                     _hover={{ cursor: "pointer" }}
-                    onClick={() => navigate("/cart")}
+                    onClick={() => {
+                      navigate("/cart");
+                      onClose(true);
+                    }}
                   />
                   <Text
-                    onClick={() => navigate("/login")}
+                    onClick={() => {
+                      navigate("/login");
+                      onClose(true);
+                    }}
                     _hover={{ textDecoration: "underline", cursor: "pointer" }}
                     marginX={2}
                   >

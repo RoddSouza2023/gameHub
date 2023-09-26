@@ -1,18 +1,16 @@
 import {
   Box,
+  Button,
   Container,
-  Flex,
+  VStack,
   HStack,
   Icon,
   Image,
   Text,
+  Tag,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import {
-  AiOutlineDelete,
-  AiOutlinePlusCircle,
-  AiOutlineMinusCircle,
-} from "react-icons/ai";
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import useCart from "../hooks/useCart";
 import { useNavigate } from "react-router-dom";
 import useUpdateCart from "../hooks/useUpdateCart";
@@ -25,88 +23,123 @@ function Cart() {
   const { handleCartDeleteItem, handleCartUpdateQuantity, updateReponse } =
     useUpdateCart(token);
 
-  function updateProducts(quantity, passedProduct) {
+  const updateProducts = (quantity, passedProduct) => {
     const index = products.findIndex((item) => item.id === passedProduct.id);
     products[index].quantity = quantity;
-  }
+  };
+
+  const cartTotalPrice = () => {
+    let total = 0;
+    products?.forEach((item) => {
+      total += item.price * item.quantity;
+    });
+    return total;
+  };
 
   useEffect(() => {
-    if (token) {
-      setProducts(getResponse.cart);
-    } else {
-      setProducts(JSON.parse(localStorage.getItem("guest_cart")));
-    }
+    setProducts(getResponse.cart);
   }, [getResponse]);
 
   return (
-    <Container paddingY={10} centerContent>
+    <Container paddingY={"40px"}>
+      <Button onClick={() => navigate("/")}>Continue Shopping</Button>
       <Text fontSize={"2xl"} marginY={5}>
-        Cart
+        Cart: {products?.length} item(s)
       </Text>
-      {error && <Text>{getResponse.error}</Text>}
-      <Box border={"inset 1px black"} padding={5} borderRadius={10}>
-        {products?.map((product, i) => (
-          <Box
-            key={product.id}
-            margin={3}
-            boxShadow={"0 0 5px black"}
-            borderRadius={5}
-            padding={2}
-          >
-            <HStack justify={"space-between"}>
-              <Image
-                align={"left"}
-                boxSize={"80px"}
-                borderRadius={10}
-                objectFit={"cover"}
-                src={product.image}
-                _hover={{ cursor: "pointer" }}
-                onClick={() => navigate(`/games/${product.slug}`)}
-              />
-              <Box>
-                <Text>{product.name}</Text>
-                <Text>
-                  {parseInt(product.price) * parseInt(products[i]?.quantity)}
-                </Text>
-              </Box>
-              <HStack>
-                <HStack marginRight={5}>
-                  <Icon
-                    onClick={() => {
-                      const quantity = Math.max(product.quantity - 1, 1);
-                      updateProducts(quantity, product);
-                      handleCartUpdateQuantity(product.id, quantity);
-                    }}
-                    as={AiOutlineMinusCircle}
-                    _hover={{ cursor: "pointer", color: "red.500" }}
-                  />
-                  <Text fontSize={"sm"}>{products[i]?.quantity}</Text>
-                  <Icon
-                    onClick={() => {
-                      const quantity = product.quantity + 1;
-                      updateProducts(quantity, product);
-                      handleCartUpdateQuantity(product.id, quantity);
-                    }}
-                    as={AiOutlinePlusCircle}
-                    _hover={{ cursor: "pointer", color: "green.500" }}
-                  />
-                </HStack>
-                <Icon
-                  color={"red.500"}
-                  as={AiOutlineDelete}
+      {products?.length === 0 && (
+        <>
+          <Image
+            borderRadius={10}
+            boxSize={300}
+            src='../dist/assets/john-travolta-hoarding.gif'
+          />
+          <Text marginTop={5}>Let's add some games to this lonely cart!</Text>
+        </>
+      )}
+      {error ? (
+        <Text>{error}</Text>
+      ) : (
+        <Box>
+          {products?.map((product, i) => (
+            <Box
+              minHeight={150}
+              key={product.id}
+              boxShadow={"2px 2px 5px black"}
+              borderRadius={5}
+              margin={2}
+              padding={2}
+              flexWrap={"wrap"}
+            >
+              <HStack marginY={"25px"} justify={"space-between"}>
+                <Image
+                  align={"left"}
+                  boxSize={"100px"}
+                  borderRadius={10}
+                  objectFit={"cover"}
+                  src={product.image}
                   _hover={{ cursor: "pointer" }}
-                  onClick={() => {
-                    setProducts(
-                      products.filter((item) => item.id !== product.id)
-                    );
-                    handleCartDeleteItem(product.id);
-                  }}
+                  onClick={() => navigate(`/games/${product.slug}`)}
                 />
+                <Box textAlign={"left"}>
+                  <Text
+                    _hover={{ cursor: "pointer", fontWeight: "bold" }}
+                    onClick={() => navigate(`/games/${product.slug}`)}
+                  >
+                    {product.name}
+                  </Text>
+                  <Text fontSize={10} color={"gray.300"} marginY={1}>
+                    Price: $
+                    {parseInt(product.price) * parseInt(products[i]?.quantity)}
+                    .00
+                  </Text>
+                </Box>
+                <VStack>
+                  <HStack>
+                    <Icon
+                      onClick={() => {
+                        const quantity = Math.max(product.quantity - 1, 1);
+                        updateProducts(quantity, product);
+                        handleCartUpdateQuantity(product.id, quantity);
+                      }}
+                      as={AiOutlineMinus}
+                      _hover={{ cursor: "pointer", color: "red.500" }}
+                    />
+                    <Tag fontSize={"sm"}>{products[i]?.quantity}</Tag>
+                    <Icon
+                      onClick={() => {
+                        const quantity = product.quantity + 1;
+                        updateProducts(quantity, product);
+                        handleCartUpdateQuantity(product.id, quantity);
+                      }}
+                      as={AiOutlinePlus}
+                      _hover={{ cursor: "pointer", color: "green.500" }}
+                    />
+                  </HStack>
+                  <Text
+                    fontSize={12}
+                    _hover={{ cursor: "pointer", textDecoration: "underline" }}
+                    color={"red.500"}
+                    onClick={() => {
+                      setProducts(
+                        products.filter((item) => item.id !== product.id)
+                      );
+                      handleCartDeleteItem(product.id);
+                    }}
+                  >
+                    Remove
+                  </Text>
+                </VStack>
               </HStack>
-            </HStack>
-          </Box>
-        ))}
-      </Box>
+            </Box>
+          ))}
+        </Box>
+      )}
+      <Text right={1} marginTop={"20px"}>
+        Cart Total: ${cartTotalPrice()}.00
+      </Text>
+      <Button color={"green.500"} marginY={5}>
+        Checkout
+      </Button>
     </Container>
   );
 }

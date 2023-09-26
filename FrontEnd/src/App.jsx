@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 import { Route, Routes } from "react-router-dom";
 import MainPage from "./components/MainPage";
 import PageNotFound from "./components/PageNotFound";
@@ -17,21 +18,11 @@ function App() {
     genre: null,
     sortOrder: null,
   });
-  const [isLoggedIn, setIsLoggedIn] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem("isLoggedIn") || false
+  );
 
   const onSelectGenre = (genre) => setGameQuery({ ...gameQuery, genre });
-  //   async function autoLogin() {
-  //     const data = await fetch("http://localhost:8080/api/v1/user/autoLogin", {
-  //       method: "GET",
-  //       credentials: "same-origin",
-  //     });
-
-  //     const response = await data.json();
-  //     console.log(response);
-  //     setLoggedIn(response.success);
-  //   }
-  //   autoLogin();
-  // }, []);
 
   return (
     <>

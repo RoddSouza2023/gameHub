@@ -5,7 +5,18 @@ import ColorModeSwitch from "./ColorModeSwitch";
 import SearchInput from "./SearchInput";
 import MenuDrawer from "./MenuDrawer";
 import { useNavigate } from "react-router-dom";
+import Badge from "@mui/material/Badge";
+import { styled } from "@mui/material/styles";
 import { pulse } from "../animations/navbarAnimation";
+
+const CustomBadge = styled(Badge)(({ theme }) => ({
+  "& .MuiBadge-badge": {
+    right: 13,
+    top: -5,
+    border: `1px solid ${theme.palette.background.paper}`,
+    padding: "0 4px",
+  },
+}));
 
 function Navbar({
   onSearch,
@@ -16,12 +27,12 @@ function Navbar({
 }) {
   const navigate = useNavigate();
 
-  async function logOut() {
+  const logOut = () => {
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("accessToken");
     setIsLoggedIn(false);
     navigate("/");
-  }
+  };
 
   return (
     <HStack padding='10px' boxShadow={"0 0 5px black"} width={"100%"}>
@@ -29,9 +40,6 @@ function Navbar({
         onClick={() => navigate("/")}
         _hover={{
           cursor: "pointer",
-          boxShadow: "0 0 5px white",
-          zIndex: 9,
-          transform: "scale(110%)",
         }}
         animation={`${pulse} 2s infinite`}
         src={logo}
@@ -48,12 +56,14 @@ function Navbar({
       <SearchInput onSearch={onSearch} />
       <Hide below='lg'>
         <ColorModeSwitch />
-        <Icon
-          marginX={5}
-          as={AiOutlineShoppingCart}
-          _hover={{ cursor: "pointer" }}
-          onClick={() => navigate("/cart")}
-        />
+        <CustomBadge badgeContent={1}>
+          <Icon
+            marginX={5}
+            as={AiOutlineShoppingCart}
+            _hover={{ cursor: "pointer" }}
+            onClick={() => navigate("/cart")}
+          />
+        </CustomBadge>
         {localStorage.isLoggedIn ? (
           <Text
             _hover={{ textDecoration: "underline", cursor: "pointer" }}

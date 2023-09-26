@@ -1,4 +1,4 @@
-import { keyframes } from "@chakra-ui/react"
+import { keyframes } from "@chakra-ui/react";
 
 export const pulse = keyframes`
 0% {

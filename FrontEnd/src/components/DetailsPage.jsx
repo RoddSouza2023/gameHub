@@ -11,17 +11,18 @@ import {
 } from "@chakra-ui/react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
+import Rating from "@mui/material/Rating";
 import { iconMap } from "./PlatformIconList";
 import ScreenshotCarousel from "./ScreenshotCarousel";
 import useGamesDetails from "../hooks/useGameDetails";
-import { BsArrowBarLeft } from "react-icons/bs";
+import { BsArrowBarLeft, BsCartPlus } from "react-icons/bs";
 import useUpdateCart from "../hooks/useUpdateCart";
 import useLocalCart from "../hooks/useLocalCart";
 
 function DetailsPage() {
   const token = localStorage?.accessToken || null;
   const { addItemToCart } = useLocalCart();
-  const { handleCartAddItems } = useUpdateCart(token);
+  const { handleCartAddItems, updateReponse } = useUpdateCart(token);
   const [showText, setShowText] = useState(false);
   const { slug } = useParams();
   const { data, error, isLoading } = useGamesDetails(slug);
@@ -31,6 +32,7 @@ function DetailsPage() {
 
   return (
     <Container>
+      {error && <Text>{error}</Text>}
       <Button marginY={5} onClick={() => navigate("/")}>
         <Icon as={BsArrowBarLeft} marginRight={2} /> Back to Main Page
       </Button>
@@ -47,28 +49,30 @@ function DetailsPage() {
           </Box>
           <Text marginX={5}>Average Playtime: {game?.playtime}</Text>
         </Flex>
-        <Text fontSize={40} marginBottom={5}>
-          {game?.name}
-        </Text>
-        <HStack alignSelf={"flex-start"} alignContent={"space-between"}>
-          <Box>
-            <Button
-              marginRight={2}
-              onClick={() => {
-                addItemToCart(game);
-                handleCartAddItems(game);
-              }}
-            >
-              Cart
-            </Button>
-            <Button marginRight={2}>Wishlist</Button>
-          </Box>
-          <Box>
-            <Text>
-              {game?.rating} / {game?.rating_top}
-            </Text>
-          </Box>
-        </HStack>
+
+        <Box alignSelf={"baseline"}>
+          {!isLoading && (
+            <Rating value={game?.rating} precision={0.1} readOnly />
+          )}
+          <Text alignSelf={"baseline"} fontSize={40}>
+            {game?.name}
+          </Text>
+        </Box>
+        <HStack
+          alignSelf={"flex-start"}
+          alignContent={"space-between"}
+        ></HStack>
+        <Button
+          alignSelf={"end"}
+          marginRight={2}
+          onClick={() => {
+            addItemToCart(game);
+            handleCartAddItems(game);
+          }}
+        >
+          <Icon marginRight={3} marginBottom={1} as={BsCartPlus} />
+          Add to Cart
+        </Button>
         <ScreenshotCarousel screenshots={game?.short_screenshots} />
         <Box marginY={10}>
           <Show breakpoint=''>
