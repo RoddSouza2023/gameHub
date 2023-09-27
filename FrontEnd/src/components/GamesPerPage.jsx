@@ -13,7 +13,7 @@ function GamesPerPage({ setGamesPerPage, gamesPerPage }) {
     <>
       <Menu>
         <MenuButton as={Button} rightIcon={<BsChevronDown />}>
-          Display: {gamesPerPage} Game(s) Per Page
+          {gamesPerPage} Game(s) Per Page
         </MenuButton>
         <MenuList>
           {sortOrders.map((order) => (

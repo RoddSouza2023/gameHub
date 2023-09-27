@@ -1,4 +1,12 @@
-import { HStack, Hide, Icon, Image, Show, Text } from "@chakra-ui/react";
+import {
+  HStack,
+  Hide,
+  Icon,
+  Image,
+  Show,
+  Text,
+  useColorMode,
+} from "@chakra-ui/react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import logo from "../assets/gaming-austro.jpg";
 import ColorModeSwitch from "./ColorModeSwitch";
@@ -9,23 +17,26 @@ import Badge from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
 import { pulse } from "../animations/navbarAnimation";
 
-const CustomBadge = styled(Badge)(({ theme }) => ({
-  "& .MuiBadge-badge": {
-    right: 13,
-    top: -5,
-    border: `1px solid ${theme.palette.background.paper}`,
-    padding: "0 4px",
-  },
-}));
-
 function Navbar({
+  cartLength,
   onSearch,
   onSelectGenre,
   selectedGenre,
   setCurrentPage,
+  isLoggedIn,
   setIsLoggedIn,
 }) {
   const navigate = useNavigate();
+  const { colorMode } = useColorMode();
+
+  const CustomBadge = styled(Badge)(({ theme }) => ({
+    "& .MuiBadge-badge": {
+      right: 13,
+      top: -5,
+      border: `1px solid ${colorMode === "dark" ? "white" : "black"}`,
+      padding: "0 4px",
+    },
+  }));
 
   const logOut = () => {
     localStorage.removeItem("isLoggedIn");
@@ -48,6 +59,11 @@ function Navbar({
       ></Image>
       <Show below='lg'>
         <MenuDrawer
+          logOut={logOut}
+          isLoggedIn={isLoggedIn}
+          colorMode={colorMode}
+          CustomBadge={CustomBadge}
+          cartLength={cartLength}
           onSelectGenre={onSelectGenre}
           selectedGenre={selectedGenre}
           setCurrentPage={setCurrentPage}
@@ -56,7 +72,7 @@ function Navbar({
       <SearchInput onSearch={onSearch} />
       <Hide below='lg'>
         <ColorModeSwitch />
-        <CustomBadge badgeContent={1}>
+        <CustomBadge badgeContent={cartLength}>
           <Icon
             marginX={5}
             as={AiOutlineShoppingCart}

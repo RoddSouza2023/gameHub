@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 function useUpdateCart(token) {
-const [updateReponse, setResponse] = useState({});
+const [updateReponse, setUpdateResponse] = useState({});
 
    //Update item quantity in cart
    const handleCartUpdateQuantity = async (id, quantity) => {
@@ -25,7 +25,7 @@ const [updateReponse, setResponse] = useState({});
       return;
     };
     
-    setResponse(res);
+    setUpdateResponse(res);
   }
 
   //Add items to cart
@@ -54,7 +54,7 @@ const [updateReponse, setResponse] = useState({});
       return;
     };
     
-    setResponse(res);
+    setUpdateResponse(res);
   }
 
   //Delete items from cart
@@ -78,7 +78,7 @@ const [updateReponse, setResponse] = useState({});
       return;
     };
     
-    setResponse(res);
+    setUpdateResponse(res);
   }
 
   return { handleCartUpdateQuantity, handleCartAddItems, handleCartDeleteItem, updateReponse }

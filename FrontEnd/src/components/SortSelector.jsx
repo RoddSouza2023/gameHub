@@ -27,10 +27,7 @@ function SortSelector({ onSelectSortOrder, sortOrder, setCurrentPage }) {
     <>
       <Menu>
         <MenuButton as={Button} rightIcon={<BsChevronDown />}>
-          <Show above='sm'>
-            Order by: {currentSortOrder?.label || "Relevance"}
-          </Show>
-          <Hide above='sm'>Order by: {currentSortOrder?.label || "Rel"}</Hide>
+          Order by: {currentSortOrder?.label || "Relevance"}
         </MenuButton>
         <MenuList>
           {sortOrders.map((order) => (

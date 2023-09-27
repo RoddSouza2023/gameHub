@@ -15,12 +15,12 @@ import useCart from "../hooks/useCart";
 import { useNavigate } from "react-router-dom";
 import useUpdateCart from "../hooks/useUpdateCart";
 
-function Cart() {
+function Cart({ cartLength, setCartLength }) {
   const token = localStorage?.accessToken || null;
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const { error, getResponse } = useCart(token);
-  const { handleCartDeleteItem, handleCartUpdateQuantity, updateReponse } =
+  const { handleCartDeleteItem, handleCartUpdateQuantity } =
     useUpdateCart(token);
 
   const updateProducts = (quantity, passedProduct) => {
@@ -99,6 +99,7 @@ function Cart() {
                       onClick={() => {
                         const quantity = Math.max(product.quantity - 1, 1);
                         updateProducts(quantity, product);
+                        setCartLength(cartLength - 1);
                         handleCartUpdateQuantity(product.id, quantity);
                       }}
                       as={AiOutlineMinus}
@@ -109,6 +110,7 @@ function Cart() {
                       onClick={() => {
                         const quantity = product.quantity + 1;
                         updateProducts(quantity, product);
+                        setCartLength(cartLength + 1);
                         handleCartUpdateQuantity(product.id, quantity);
                       }}
                       as={AiOutlinePlus}
@@ -122,6 +124,9 @@ function Cart() {
                     onClick={() => {
                       setProducts(
                         products.filter((item) => item.id !== product.id)
+                      );
+                      setCartLength(
+                        cartLength - products.find((item) => item.id).quantity
                       );
                       handleCartDeleteItem(product.id);
                     }}
@@ -137,7 +142,15 @@ function Cart() {
       <Text right={1} marginTop={"20px"}>
         Cart Total: ${cartTotalPrice()}.00
       </Text>
-      <Button color={"green.500"} marginY={5}>
+      <Button
+        isDisabled={products?.length < 1}
+        onClick={() => {
+          setCartLength(0);
+          navigate("/checkout");
+        }}
+        color={"green.500"}
+        marginY={5}
+      >
         Checkout
       </Button>
     </Container>

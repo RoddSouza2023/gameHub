@@ -19,10 +19,10 @@ import { BsArrowBarLeft, BsCartPlus } from "react-icons/bs";
 import useUpdateCart from "../hooks/useUpdateCart";
 import useLocalCart from "../hooks/useLocalCart";
 
-function DetailsPage() {
+function DetailsPage({ setCartLength, cartLength, isLoggedIn }) {
   const token = localStorage?.accessToken || null;
   const { addItemToCart } = useLocalCart();
-  const { handleCartAddItems, updateReponse } = useUpdateCart(token);
+  const { handleCartAddItems } = useUpdateCart(token);
   const [showText, setShowText] = useState(false);
   const { slug } = useParams();
   const { data, error, isLoading } = useGamesDetails(slug);
@@ -66,8 +66,8 @@ function DetailsPage() {
           alignSelf={"end"}
           marginRight={2}
           onClick={() => {
-            addItemToCart(game);
-            handleCartAddItems(game);
+            setCartLength(cartLength + 1);
+            !token ? addItemToCart(game) : handleCartAddItems(game);
           }}
         >
           <Icon marginRight={3} marginBottom={1} as={BsCartPlus} />

@@ -40,8 +40,8 @@ function MainContentContainer({
         <>
           <Box paddingLeft={2}>
             <GameHeading gameQuery={gameQuery} />
-            <Flex marginBottom={5}>
-              <Box marginRight={5}>
+            <Flex wrap={"wrap"} marginBottom={5}>
+              <Box marginRight={5} marginBottom={5}>
                 <PlatformSelector
                   selectedPlatform={gameQuery.platform}
                   onSelectPlatform={onSelectPlatform}
@@ -54,6 +54,12 @@ function MainContentContainer({
                 onSelectSortOrder={(sortOrder) =>
                   setGameQuery({ ...gameQuery, sortOrder })
                 }
+              />
+            </Flex>
+            <HStack>
+              <GamesPerPage
+                gamesPerPage={gamesPerPage}
+                setGamesPerPage={setGamesPerPage}
               />
               {(gameQuery.genre ||
                 gameQuery.platform ||
@@ -71,11 +77,7 @@ function MainContentContainer({
                   }}
                 ></IconButton>
               )}
-            </Flex>
-            <GamesPerPage
-              gamesPerPage={gamesPerPage}
-              setGamesPerPage={setGamesPerPage}
-            />
+            </HStack>
           </Box>
           <GameGrid data={currentGames} error={error} isLoading={isLoading} />
           <Container marginY={5} centerContent>

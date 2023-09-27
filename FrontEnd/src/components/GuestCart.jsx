@@ -15,7 +15,7 @@ import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import useLocalCart from "../hooks/useLocalCart";
 import { useNavigate } from "react-router-dom";
 
-function GuestCart() {
+function GuestCart({ cartLength, setCartLength }) {
   const navigate = useNavigate();
   const { updateItemQuantityInCart, deleteItemFromCart, response } =
     useLocalCart();
@@ -96,6 +96,7 @@ function GuestCart() {
                     onClick={() => {
                       const quantity = Math.max(product.quantity - 1, 1);
                       updateGuestCart(quantity, product);
+                      setCartLength(cartLength - 1);
                       updateItemQuantityInCart(product.id, quantity);
                     }}
                     as={AiOutlineMinus}
@@ -106,6 +107,7 @@ function GuestCart() {
                     onClick={() => {
                       const quantity = product.quantity + 1;
                       updateGuestCart(quantity, product);
+                      setCartLength(cartLength + 1);
                       updateItemQuantityInCart(product.id, quantity);
                     }}
                     as={AiOutlinePlus}
@@ -119,6 +121,9 @@ function GuestCart() {
                   onClick={() => {
                     setGuestCart(
                       guestCart.filter((item) => item.id !== product.id)
+                    );
+                    setCartLength(
+                      cartLength - guestCart.find((item) => item.id).quantity
                     );
                     deleteItemFromCart(product.id);
                   }}
@@ -134,7 +139,15 @@ function GuestCart() {
       <Text right={1} marginTop={"20px"}>
         Cart Total: ${cartTotalPrice()}.00
       </Text>
-      <Button color={"green.500"} margin={5}>
+      <Button
+        isDisabled={guestCart?.length < 1}
+        onClick={() => {
+          setCartLength(0);
+          navigate("/checkout");
+        }}
+        color={"green.500"}
+        margin={5}
+      >
         Checkout
       </Button>
     </Container>
