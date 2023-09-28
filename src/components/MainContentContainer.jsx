@@ -6,7 +6,6 @@ import {
   HStack,
   IconButton,
   Text,
-  Hide,
 } from "@chakra-ui/react";
 import GameGrid from "./GameGrid";
 import PlatformSelector from "./PlatformSelector";
@@ -85,7 +84,10 @@ function MainContentContainer({
               <HStack>
                 <Button
                   isDisabled={currentPage === 1}
-                  onClick={() => setCurrentPage(currentPage - 1)}
+                  onClick={() => {
+                    setCurrentPage(currentPage - 1);
+                    window.scrollTo({ top: 0 });
+                  }}
                 >
                   Prev
                 </Button>
@@ -94,7 +96,10 @@ function MainContentContainer({
                 </Text>
                 <Button
                   isDisabled={currentPage === maxPageNumber}
-                  onClick={() => setCurrentPage(currentPage + 1)}
+                  onClick={() => {
+                    setCurrentPage(currentPage + 1);
+                    window.scrollTo({ top: 0 });
+                  }}
                 >
                   Next
                 </Button>
