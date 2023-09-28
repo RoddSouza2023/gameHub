@@ -1,15 +1,15 @@
 import { useState } from "react";
 
-function useLogin() {
+function useVerify() {
   const [response, setResponse] = useState({});
   const [error, setError] = useState(null);
 
-  const handleLogin = async ({ email, password }) => {
-    const data = await fetch(`${import.meta.env.VITE_API_URL}/user`, {
+  const handleVerify = async ({ email, otp }) => {
+    const data = await fetch(`${import.meta.env.VITE_API_URL}/email_verification/verify`, {
       method: "POST",
       body: JSON.stringify({
         email: email,
-        password: password,
+        otp: otp,
       }),
       headers: {
         "Content-type": "application/json",
@@ -20,14 +20,11 @@ function useLogin() {
       setError(res.error);
       return;
     };
-
-    window.localStorage.setItem("accessToken", res.user.token);
-    window.localStorage.setItem("isLoggedIn", true);
     
     setResponse(res);
   }
 
-  return { handleLogin, response, error }
+  return { handleVerify, response, error }
 }
 
-export default useLogin;
+export default useVerify;

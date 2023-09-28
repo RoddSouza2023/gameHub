@@ -10,40 +10,37 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { AiOutlineEye } from "react-icons/ai";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-const handleRegister = async ({ name, email, password }) => {
-  const response = await fetch(
-    "https://gamestore-twj1.onrender.com/api/v1/user/signup",
-    {
-      method: "POST",
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        password: password,
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    }
-  );
-};
+import useRegister from "../hooks/useRegister";
 
 function Register() {
-  const navigate = useNavigate();
+  const { handleRegister, response, error } = useRegister();
   const [change, setChange] = useState(true);
   const [userData, setUserData] = useState({
     name: null,
     email: null,
     password: null,
   });
+  const navigate = useNavigate();
+
+  useEffect(() => {}, [response]);
 
   return (
     <Box padding={10} textAlign={"center"}>
       <Text fontSize='2xl' marginBottom={5}>
         Register
       </Text>
+      {error && !response.success ? (
+        <Text margin={5} color={"red.500"}>
+          {error}
+        </Text>
+      ) : null}
+      {response.success && (
+        <Text margin={5} color={"green.500"}>
+          {response.message}
+        </Text>
+      )}
       <FormControl maxW={400} marginX={"auto"}>
         <FormLabel>Name</FormLabel>
         <Input

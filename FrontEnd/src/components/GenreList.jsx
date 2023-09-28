@@ -9,7 +9,7 @@ import {
 import useGenres from "../hooks/useGenres";
 import getCroppedImageUrl from "../services/image-url";
 
-function GenreList({ onSelectGenre, selectedGenre, onClose }) {
+function GenreList({ onSelectGenre, selectedGenre, onClose, setCurrentPage }) {
   const { data, isLoading, error } = useGenres();
   //renders nothing if there is an error while retrieving the genre data from server
   if (error) return null;
@@ -34,6 +34,7 @@ function GenreList({ onSelectGenre, selectedGenre, onClose }) {
                 fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
                 onClick={() => {
                   onSelectGenre(genre);
+                  setCurrentPage(1);
                   onClose && setTimeout(() => onClose(), 200);
                 }}
                 fontSize='lg'

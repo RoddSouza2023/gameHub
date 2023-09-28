@@ -2,64 +2,115 @@ import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import MainPage from "./components/MainPage";
 import PageNotFound from "./components/PageNotFound";
-import "./App.css";
 import DetailsPage from "./components/DetailsPage";
+import CheckOut from "./components/CheckOut";
 import Navbar from "./components/Navbar";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Cart from "./components/Cart";
+import VerifyEmail from "./components/VerifyEmail";
+import GuestCart from "./components/GuestCart";
+import useCart from "./hooks/useCart";
+import UserProfile from "./components/UserProfile";
+import ChangePassword from "./components/ChangePassword";
 
 function App() {
+  const [currentPage, setCurrentPage] = useState(1);
   const [gameQuery, setGameQuery] = useState({
     platform: null,
     genre: null,
     sortOrder: null,
   });
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem("isLoggedIn") || false
+  );
+  const token = localStorage.getItem("accessToken");
+  const { getResponse } = useCart(token);
+  const [cartLength, setCartLength] = useState(0);
   const onSelectGenre = (genre) => setGameQuery({ ...gameQuery, genre });
 
   useEffect(() => {
-    async function autoLogin() {
-      const data = await fetch("http://localhost:8080/api/v1/user/autoLogin", {
-        method: "GET",
-        credentials: "same-origin",
+    let length = 0;
+    if (token) {
+      getResponse.cart?.forEach((item) => {
+        length += item.quantity;
       });
-
-      const response = await data.json();
-      console.log(response);
-      setLoggedIn(response.success);
+      setCartLength(length);
+    } else {
+      JSON.parse(localStorage.getItem("guest_cart")).forEach((item) => {
+        length += item.quantity;
+      });
+      setCartLength(length);
     }
-    autoLogin();
-  }, []);
+  }, [getResponse, isLoggedIn]);
 
   return (
     <>
       <Navbar
-        setLoggedIn={setLoggedIn}
-        loggedIn={loggedIn}
+        isLoggedIn={isLoggedIn}
+        cartLength={cartLength}
+        setIsLoggedIn={setIsLoggedIn}
         onSelectGenre={onSelectGenre}
         selectedGenre={gameQuery.genre}
         onSearch={(searchText) => setGameQuery({ ...gameQuery, searchText })}
+        setCurrentPage={setCurrentPage}
       />
       <Routes>
         <Route
           path='/'
           element={
             <MainPage
+              setCurrentPage={setCurrentPage}
+              currentPage={currentPage}
               gameQuery={gameQuery}
               setGameQuery={setGameQuery}
               onSelectGenre={onSelectGenre}
             />
           }
         ></Route>
-        <Route path='/:gameId' element={<DetailsPage />}></Route>
+        <Route
+          path='/games/:slug'
+          element={
+            <DetailsPage
+              isLoggedIn={isLoggedIn}
+              setCartLength={setCartLength}
+              cartLength={cartLength}
+            />
+          }
+        ></Route>
         <Route path='*' element={<PageNotFound />}></Route>
         <Route
           path='/login'
-          element={<Login setLoggedIn={setLoggedIn} />}
+          element={<Login setIsLoggedIn={setIsLoggedIn} />}
         ></Route>
         <Route path='/register' element={<Register />}></Route>
-        <Route path='/cart' element={<Cart />}></Route>
+        <Route
+          path='/change_password'
+          element={
+            isLoggedIn ? <ChangePassword token={token} /> : <PageNotFound />
+          }
+        ></Route>
+        <Route path='/verify' element={<VerifyEmail />}></Route>
+        <Route
+          path='/cart'
+          element={
+            isLoggedIn ? (
+              <Cart cartLength={cartLength} setCartLength={setCartLength} />
+            ) : (
+              <GuestCart
+                cartLength={cartLength}
+                setCartLength={setCartLength}
+              />
+            )
+          }
+        ></Route>
+        <Route
+          path='/profile'
+          element={
+            isLoggedIn ? <UserProfile token={token} /> : <PageNotFound />
+          }
+        ></Route>
+        <Route path='/checkout' element={<CheckOut token={token} />}></Route>
       </Routes>
     </>
   );

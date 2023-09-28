@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
 
-function SortSelector({ onSelectSortOrder, sortOrder }) {
+function SortSelector({ onSelectSortOrder, sortOrder, setCurrentPage }) {
   const sortOrders = [
     { value: "", label: "Relevance" },
     { value: "-added", label: "Date added" },
@@ -27,15 +27,15 @@ function SortSelector({ onSelectSortOrder, sortOrder }) {
     <>
       <Menu>
         <MenuButton as={Button} rightIcon={<BsChevronDown />}>
-          <Show above='sm'>
-            Order by: {currentSortOrder?.label || "Relevance"}
-          </Show>
-          <Hide above='sm'>Order by: {currentSortOrder?.label || "Rel"}</Hide>
+          Order by: {currentSortOrder?.label || "Relevance"}
         </MenuButton>
         <MenuList>
           {sortOrders.map((order) => (
             <MenuItem
-              onClick={() => onSelectSortOrder(order.value)}
+              onClick={() => {
+                onSelectSortOrder(order.value);
+                setCurrentPage(1);
+              }}
               key={order.value}
               value={order.value}
             >

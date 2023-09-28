@@ -1,5 +1,4 @@
 import {
-  Button,
   Drawer,
   DrawerOverlay,
   DrawerCloseButton,
@@ -17,14 +16,33 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { useRef } from "react";
 import GenreList from "./GenreList";
+import Badge from "@mui/material/Badge";
+import { styled } from "@mui/material/styles";
 import { useLocation, useNavigate } from "react-router-dom";
 import ColorModeSwitch from "./ColorModeSwitch";
 
-function MenuDrawer({ onSelectGenre, selectedGenre }) {
+function MenuDrawer({
+  logOut,
+  isLoggedIn,
+  colorMode,
+  onSelectGenre,
+  selectedGenre,
+  setCurrentPage,
+  cartLength,
+}) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef();
   const { pathname } = useLocation();
   const navigate = useNavigate();
+
+  const CustomBadge = styled(Badge)(({ theme }) => ({
+    "& .MuiBadge-badge": {
+      right: 13,
+      top: -5,
+      border: `1px solid ${colorMode === "dark" ? "white" : "black"}`,
+      padding: "0 4px",
+    },
+  }));
 
   return (
     <>
@@ -49,21 +67,60 @@ function MenuDrawer({ onSelectGenre, selectedGenre }) {
 
               <DrawerBody>
                 <HStack justify={"space-around"} paddingY={5}>
-                  <Icon
-                    as={AiOutlineShoppingCart}
-                    _hover={{ cursor: "pointer" }}
-                    onClick={() => navigate("/cart")}
-                  />
-                  <Text
-                    onClick={() => navigate("/login")}
-                    _hover={{ textDecoration: "underline", cursor: "pointer" }}
-                    marginX={2}
-                  >
-                    Login/Register
-                  </Text>
+                  <CustomBadge badgeContent={cartLength}>
+                    <Icon
+                      marginX={5}
+                      as={AiOutlineShoppingCart}
+                      _hover={{ cursor: "pointer" }}
+                      onClick={() => {
+                        navigate("/cart");
+                        onClose(true);
+                      }}
+                    />
+                  </CustomBadge>
+                  {isLoggedIn ? (
+                    <>
+                      <Text
+                        onClick={() => {
+                          navigate("/profile");
+                          onClose(true);
+                        }}
+                        _hover={{
+                          textDecoration: "underline",
+                          cursor: "pointer",
+                        }}
+                      >
+                        Profile
+                      </Text>
+                      <Text
+                        onClick={() => {
+                          logOut();
+                          onClose(true);
+                          setTimeout(navigate("/", 400));
+                        }}
+                      >
+                        Logout
+                      </Text>
+                    </>
+                  ) : (
+                    <Text
+                      onClick={() => {
+                        navigate("/login");
+                        onClose(true);
+                      }}
+                      _hover={{
+                        textDecoration: "underline",
+                        cursor: "pointer",
+                      }}
+                      marginX={2}
+                    >
+                      Login/Register
+                    </Text>
+                  )}
                   <ColorModeSwitch />
                 </HStack>
                 <GenreList
+                  setCurrentPage={setCurrentPage}
                   onClose={onClose}
                   selectedGenre={selectedGenre}
                   onSelectGenre={onSelectGenre}
@@ -91,7 +148,20 @@ function MenuDrawer({ onSelectGenre, selectedGenre }) {
             <DrawerOverlay />
             <DrawerContent>
               <DrawerCloseButton />
-              <DrawerHeader boxShadow={"0 0 5px black"}>Menu</DrawerHeader>
+              <DrawerHeader boxShadow={"0 0 5px black"}>
+                <HStack>
+                  <Text>Menu /</Text>{" "}
+                  <Text
+                    onClick={() => {
+                      navigate("/");
+                      onClose(true);
+                    }}
+                    _hover={{ textDecoration: "underline", cursor: "pointer" }}
+                  >
+                    Home
+                  </Text>
+                </HStack>
+              </DrawerHeader>
 
               <DrawerBody>
                 <HStack
@@ -99,18 +169,56 @@ function MenuDrawer({ onSelectGenre, selectedGenre }) {
                   marginY={"auto"}
                   paddingTop={5}
                 >
-                  <Icon
-                    as={AiOutlineShoppingCart}
-                    _hover={{ cursor: "pointer" }}
-                    onClick={() => navigate("/cart")}
-                  />
-                  <Text
-                    onClick={() => navigate("/login")}
-                    _hover={{ textDecoration: "underline", cursor: "pointer" }}
-                    marginX={2}
-                  >
-                    Login/Register
-                  </Text>
+                  <CustomBadge badgeContent={cartLength}>
+                    <Icon
+                      marginX={5}
+                      as={AiOutlineShoppingCart}
+                      _hover={{ cursor: "pointer" }}
+                      onClick={() => {
+                        navigate("/cart");
+                        onClose(true);
+                      }}
+                    />
+                  </CustomBadge>
+                  {isLoggedIn ? (
+                    <>
+                      <Text
+                        onClick={() => {
+                          navigate("/profile");
+                          onClose(true);
+                        }}
+                        _hover={{
+                          textDecoration: "underline",
+                          cursor: "pointer",
+                        }}
+                      >
+                        Profile
+                      </Text>
+                      <Text
+                        onClick={() => {
+                          logOut();
+                          onClose(true);
+                          setTimeout(navigate("/", 400));
+                        }}
+                      >
+                        Logout
+                      </Text>
+                    </>
+                  ) : (
+                    <Text
+                      onClick={() => {
+                        navigate("/login");
+                        onClose(true);
+                      }}
+                      _hover={{
+                        textDecoration: "underline",
+                        cursor: "pointer",
+                      }}
+                      marginX={2}
+                    >
+                      Login/Register
+                    </Text>
+                  )}
                   <ColorModeSwitch />
                 </HStack>
               </DrawerBody>
