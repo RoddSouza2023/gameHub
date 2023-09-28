@@ -10,9 +10,9 @@ import Register from "./components/Register";
 import Cart from "./components/Cart";
 import VerifyEmail from "./components/VerifyEmail";
 import GuestCart from "./components/GuestCart";
-import useCart from "./hooks/useCart";
 import UserProfile from "./components/UserProfile";
 import ChangePassword from "./components/ChangePassword";
+import useCart from "./hooks/useCart";
 
 function App() {
   const [currentPage, setCurrentPage] = useState(1);

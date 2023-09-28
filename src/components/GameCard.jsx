@@ -1,9 +1,9 @@
 import { Card, CardBody, HStack, Heading, Image } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 import PlatformIconList from "./PlatformIconList";
 import CriticScore from "./CriticScore";
 import getCroppedImageUrl from "../services/image-url";
 import Emoji from "./Emoji";
-import { useNavigate } from "react-router-dom";
 
 function GameCard({ game }) {
   const navigate = useNavigate();

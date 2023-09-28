@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { DeleteIcon } from "@chakra-ui/icons";
 import {
   IconButton,
@@ -6,9 +7,8 @@ import {
   InputLeftElement,
   InputRightElement,
 } from "@chakra-ui/react";
-import { useRef } from "react";
-import { BsSearch } from "react-icons/bs";
 import { useLocation, useNavigate } from "react-router-dom";
+import { BsSearch } from "react-icons/bs";
 
 function SearchInput({ onSearch }) {
   const { pathname } = useLocation();

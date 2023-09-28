@@ -12,15 +12,15 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { iconMap } from "./PlatformIconList";
+import { BsArrowBarLeft, BsCartPlus, BsCartCheckFill } from "react-icons/bs";
+import { pulse } from "../animations/navbarAnimation";
 import ScreenshotCarousel from "./ScreenshotCarousel";
 import useGamesDetails from "../hooks/useGameDetails";
-import { BsArrowBarLeft, BsCartPlus, BsCartCheckFill } from "react-icons/bs";
 import useUpdateCart from "../hooks/useUpdateCart";
 import useLocalCart from "../hooks/useLocalCart";
-import { pulse } from "../animations/navbarAnimation";
 import "../styles/gameRating.css";
 
-function DetailsPage({ setCartLength, cartLength, isLoggedIn }) {
+function DetailsPage({ setCartLength, cartLength }) {
   const token = localStorage?.accessToken || null;
   const { addItemToCart } = useLocalCart();
   const { handleCartAddItems } = useUpdateCart(token);

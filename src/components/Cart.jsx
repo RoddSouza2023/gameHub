@@ -13,10 +13,10 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
-import useCart from "../hooks/useCart";
-import johnTravolta from "../assets/john-travolta-hoarding.gif";
 import { useNavigate } from "react-router-dom";
+import johnTravolta from "../assets/john-travolta-hoarding.gif";
 import useUpdateCart from "../hooks/useUpdateCart";
+import useCart from "../hooks/useCart";
 
 function Cart({ cartLength, setCartLength }) {
   const token = localStorage?.accessToken || null;
