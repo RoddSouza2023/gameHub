@@ -9,6 +9,7 @@ import {
   Text,
   Tag,
   Show,
+  Spinner,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
@@ -21,7 +22,7 @@ function Cart({ cartLength, setCartLength }) {
   const token = localStorage?.accessToken || null;
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
-  const { error, getResponse } = useCart(token);
+  const { error, getResponse, isLoading } = useCart(token);
   const { handleCartDeleteItem, handleCartUpdateQuantity } =
     useUpdateCart(token);
 
@@ -58,89 +59,97 @@ function Cart({ cartLength, setCartLength }) {
         <Text>{error}</Text>
       ) : (
         <Box>
-          {products?.map((product, i) => (
-            <Box
-              minHeight={150}
-              key={product.id}
-              boxShadow={"2px 2px 5px black"}
-              borderRadius={5}
-              margin={2}
-              padding={2}
-              flexWrap={"wrap"}
-            >
-              <Show below='sm'>
-                <Text>{product.name}</Text>
-              </Show>
-              <HStack marginY={"25px"} justify={"space-between"}>
-                <Image
-                  align={"left"}
-                  boxSize={"100px"}
-                  borderRadius={10}
-                  objectFit={"cover"}
-                  src={product.image}
-                  _hover={{ cursor: "pointer" }}
-                  onClick={() => navigate(`/games/${product.slug}`)}
-                />
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            products?.map((product, i) => (
+              <Box
+                minHeight={150}
+                key={product.id}
+                boxShadow={"2px 2px 5px black"}
+                borderRadius={5}
+                margin={2}
+                padding={2}
+                flexWrap={"wrap"}
+              >
+                <Show below='sm'>
+                  <Text>{product.name}</Text>
+                </Show>
+                <HStack marginY={"25px"} justify={"space-between"}>
+                  <Image
+                    align={"left"}
+                    boxSize={"100px"}
+                    borderRadius={10}
+                    objectFit={"cover"}
+                    src={product.image}
+                    _hover={{ cursor: "pointer" }}
+                    onClick={() => navigate(`/games/${product.slug}`)}
+                  />
 
-                <Box>
-                  <Show above='sm'>
-                    <Text
-                      _hover={{ cursor: "pointer", fontWeight: "bold" }}
-                      onClick={() => navigate(`/games/${product.slug}`)}
-                    >
-                      {product.name}
+                  <Box>
+                    <Show above='sm'>
+                      <Text
+                        _hover={{ cursor: "pointer", fontWeight: "bold" }}
+                        onClick={() => navigate(`/games/${product.slug}`)}
+                      >
+                        {product.name}
+                      </Text>
+                    </Show>
+                    <Text fontSize={10} color={"gray.300"} marginY={1}>
+                      Price: $
+                      {parseInt(product.price) *
+                        parseInt(products[i]?.quantity)}
+                      .00
                     </Text>
-                  </Show>
-                  <Text fontSize={10} color={"gray.300"} marginY={1}>
-                    Price: $
-                    {parseInt(product.price) * parseInt(products[i]?.quantity)}
-                    .00
-                  </Text>
-                </Box>
-                <VStack>
-                  <HStack>
-                    <Icon
-                      onClick={() => {
-                        const quantity = Math.max(product.quantity - 1, 1);
-                        updateProducts(quantity, product);
-                        setCartLength(cartLength - 1);
-                        handleCartUpdateQuantity(product.id, quantity);
+                  </Box>
+                  <VStack>
+                    <HStack>
+                      <Icon
+                        onClick={() => {
+                          const quantity = Math.max(product.quantity - 1, 1);
+                          updateProducts(quantity, product);
+                          setCartLength(cartLength - 1);
+                          handleCartUpdateQuantity(product.id, quantity);
+                        }}
+                        as={AiOutlineMinus}
+                        _hover={{ cursor: "pointer", color: "red.500" }}
+                      />
+                      <Tag fontSize={"sm"}>{products[i]?.quantity}</Tag>
+                      <Icon
+                        onClick={() => {
+                          const quantity = product.quantity + 1;
+                          updateProducts(quantity, product);
+                          setCartLength(cartLength + 1);
+                          handleCartUpdateQuantity(product.id, quantity);
+                        }}
+                        as={AiOutlinePlus}
+                        _hover={{ cursor: "pointer", color: "green.500" }}
+                      />
+                    </HStack>
+                    <Text
+                      fontSize={12}
+                      _hover={{
+                        cursor: "pointer",
+                        textDecoration: "underline",
                       }}
-                      as={AiOutlineMinus}
-                      _hover={{ cursor: "pointer", color: "red.500" }}
-                    />
-                    <Tag fontSize={"sm"}>{products[i]?.quantity}</Tag>
-                    <Icon
+                      color={"red.500"}
                       onClick={() => {
-                        const quantity = product.quantity + 1;
-                        updateProducts(quantity, product);
-                        setCartLength(cartLength + 1);
-                        handleCartUpdateQuantity(product.id, quantity);
+                        setProducts(
+                          products.filter((item) => item.id !== product.id)
+                        );
+                        setCartLength(
+                          cartLength - products.find((item) => item.id).quantity
+                        );
+                        handleCartDeleteItem(product.id);
                       }}
-                      as={AiOutlinePlus}
-                      _hover={{ cursor: "pointer", color: "green.500" }}
-                    />
-                  </HStack>
-                  <Text
-                    fontSize={12}
-                    _hover={{ cursor: "pointer", textDecoration: "underline" }}
-                    color={"red.500"}
-                    onClick={() => {
-                      setProducts(
-                        products.filter((item) => item.id !== product.id)
-                      );
-                      setCartLength(
-                        cartLength - products.find((item) => item.id).quantity
-                      );
-                      handleCartDeleteItem(product.id);
-                    }}
-                  >
-                    Remove
-                  </Text>
-                </VStack>
-              </HStack>
-            </Box>
-          ))}
+                    >
+                      Remove
+                    </Text>
+                  </VStack>
+                </HStack>
+              </Box>
+            ))
+          )}
         </Box>
       )}
       <Text right={1} marginTop={"20px"}>
