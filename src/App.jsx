@@ -78,7 +78,7 @@ function App() {
             />
           }
         ></Route>
-        <Route path='*' element={<PageNotFound />}></Route>
+        <Route path={"*" || "/PageNotFound"} element={<PageNotFound />}></Route>
         <Route
           path='/login'
           element={<Login setIsLoggedIn={setIsLoggedIn} />}
