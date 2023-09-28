@@ -27,7 +27,7 @@ function useClearCart(token) {
 
     clearCartCheckout();
 
-    return () => localStorage.setItem("guest_cart", JSON.stringify([]));
+    if (!token) return () => localStorage.setItem("guest_cart", JSON.stringify([]));
   }, []);
 
   return {response, isLoading};
