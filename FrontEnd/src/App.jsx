@@ -11,6 +11,8 @@ import Cart from "./components/Cart";
 import VerifyEmail from "./components/VerifyEmail";
 import GuestCart from "./components/GuestCart";
 import useCart from "./hooks/useCart";
+import UserProfile from "./components/UserProfile";
+import ChangePassword from "./components/ChangePassword";
 
 function App() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -82,6 +84,12 @@ function App() {
           element={<Login setIsLoggedIn={setIsLoggedIn} />}
         ></Route>
         <Route path='/register' element={<Register />}></Route>
+        <Route
+          path='/change_password'
+          element={
+            isLoggedIn ? <ChangePassword token={token} /> : <PageNotFound />
+          }
+        ></Route>
         <Route path='/verify' element={<VerifyEmail />}></Route>
         <Route
           path='/cart'
@@ -94,6 +102,12 @@ function App() {
                 setCartLength={setCartLength}
               />
             )
+          }
+        ></Route>
+        <Route
+          path='/profile'
+          element={
+            isLoggedIn ? <UserProfile token={token} /> : <PageNotFound />
           }
         ></Route>
         <Route path='/checkout' element={<CheckOut token={token} />}></Route>

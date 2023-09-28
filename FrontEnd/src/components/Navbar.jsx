@@ -81,12 +81,20 @@ function Navbar({
           />
         </CustomBadge>
         {localStorage.isLoggedIn ? (
-          <Text
-            _hover={{ textDecoration: "underline", cursor: "pointer" }}
-            onClick={() => logOut()}
-          >
-            Logout
-          </Text>
+          <>
+            <Text
+              onClick={() => navigate("/profile")}
+              _hover={{ textDecoration: "underline", cursor: "pointer" }}
+            >
+              Profile
+            </Text>
+            <Text
+              _hover={{ textDecoration: "underline", cursor: "pointer" }}
+              onClick={() => logOut()}
+            >
+              Logout
+            </Text>
+          </>
         ) : (
           <Text
             onClick={() => navigate("/login")}

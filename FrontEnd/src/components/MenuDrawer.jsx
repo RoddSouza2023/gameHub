@@ -79,15 +79,29 @@ function MenuDrawer({
                     />
                   </CustomBadge>
                   {isLoggedIn ? (
-                    <Text
-                      onClick={() => {
-                        logOut();
-                        onClose(true);
-                        setTimeout(navigate("/", 400));
-                      }}
-                    >
-                      Logout
-                    </Text>
+                    <>
+                      <Text
+                        onClick={() => {
+                          navigate("/profile");
+                          onClose(true);
+                        }}
+                        _hover={{
+                          textDecoration: "underline",
+                          cursor: "pointer",
+                        }}
+                      >
+                        Profile
+                      </Text>
+                      <Text
+                        onClick={() => {
+                          logOut();
+                          onClose(true);
+                          setTimeout(navigate("/", 400));
+                        }}
+                      >
+                        Logout
+                      </Text>
+                    </>
                   ) : (
                     <Text
                       onClick={() => {
@@ -167,15 +181,29 @@ function MenuDrawer({
                     />
                   </CustomBadge>
                   {isLoggedIn ? (
-                    <Text
-                      onClick={() => {
-                        logOut();
-                        onClose(true);
-                        setTimeout(navigate("/", 400));
-                      }}
-                    >
-                      Logout
-                    </Text>
+                    <>
+                      <Text
+                        onClick={() => {
+                          navigate("/profile");
+                          onClose(true);
+                        }}
+                        _hover={{
+                          textDecoration: "underline",
+                          cursor: "pointer",
+                        }}
+                      >
+                        Profile
+                      </Text>
+                      <Text
+                        onClick={() => {
+                          logOut();
+                          onClose(true);
+                          setTimeout(navigate("/", 400));
+                        }}
+                      >
+                        Logout
+                      </Text>
+                    </>
                   ) : (
                     <Text
                       onClick={() => {

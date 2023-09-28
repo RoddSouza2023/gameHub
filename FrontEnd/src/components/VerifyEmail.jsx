@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  CircularProgress,
   Container,
   FormControl,
   FormLabel,
@@ -11,16 +10,19 @@ import {
   InputGroup,
   InputRightElement,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { AiOutlineEye } from "react-icons/ai";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useVerify from "../hooks/useVerify";
+import RequestNewOTP from "./RequestNewOTP";
 
 function VerifyEmail() {
   const navigate = useNavigate();
   const [visibility, setVisibility] = useState(true);
   const { handleVerify, response, error } = useVerify();
+  const { onOpen, onClose, isOpen } = useDisclosure();
   const [userData, setUserData] = useState({
     email: "",
     otp: "",
@@ -105,6 +107,18 @@ function VerifyEmail() {
             >
               Login
             </Text>
+            <Text>/</Text>
+            <Text
+              _hover={{
+                color: "lightblue",
+                cursor: "pointer",
+                textDecoration: "underline",
+              }}
+              onClick={onOpen}
+            >
+              New Code
+            </Text>
+            <RequestNewOTP isOpen={isOpen} onClose={onClose} />
           </HStack>
         </Container>
       </FormControl>
