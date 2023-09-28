@@ -14,9 +14,10 @@ import { useState } from "react";
 import { iconMap } from "./PlatformIconList";
 import ScreenshotCarousel from "./ScreenshotCarousel";
 import useGamesDetails from "../hooks/useGameDetails";
-import { BsArrowBarLeft, BsCartPlus } from "react-icons/bs";
+import { BsArrowBarLeft, BsCartPlus, BsCartCheckFill } from "react-icons/bs";
 import useUpdateCart from "../hooks/useUpdateCart";
 import useLocalCart from "../hooks/useLocalCart";
+import { pulse } from "../animations/navbarAnimation";
 import "../styles/gameRating.css";
 
 function DetailsPage({ setCartLength, cartLength, isLoggedIn }) {
@@ -24,6 +25,7 @@ function DetailsPage({ setCartLength, cartLength, isLoggedIn }) {
   const { addItemToCart } = useLocalCart();
   const { handleCartAddItems } = useUpdateCart(token);
   const [showText, setShowText] = useState(false);
+  const [grow, setGrow] = useState(false);
   const { slug } = useParams();
   const { data, error, isLoading } = useGamesDetails(slug);
   const navigate = useNavigate();
@@ -69,11 +71,19 @@ function DetailsPage({ setCartLength, cartLength, isLoggedIn }) {
           alignSelf={"end"}
           marginRight={2}
           onClick={() => {
+            setGrow(true);
+            setTimeout(() => setGrow(false), 1000);
             setCartLength(cartLength + 1);
             !token ? addItemToCart(game) : handleCartAddItems(game);
           }}
         >
-          <Icon marginRight={3} marginBottom={1} as={BsCartPlus} />
+          <Icon
+            color={grow ? "green" : null}
+            animation={grow ? `${pulse} 1s` : null}
+            marginRight={3}
+            marginBottom={1}
+            as={grow ? BsCartCheckFill : BsCartPlus}
+          />
           Add to Cart
         </Button>
         <ScreenshotCarousel screenshots={game?.short_screenshots} />
