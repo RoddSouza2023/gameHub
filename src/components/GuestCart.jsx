@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import useLocalCart from "../hooks/useLocalCart";
 import { useNavigate } from "react-router-dom";
+import johnTravolta from "../assets/john-travolta-hoarding.gif";
 
 function GuestCart({ cartLength, setCartLength }) {
   const navigate = useNavigate();
@@ -48,11 +49,7 @@ function GuestCart({ cartLength, setCartLength }) {
       </Text>
       {guestCart.length === 0 && (
         <>
-          <Image
-            borderRadius={10}
-            boxSize={300}
-            src='src/assets/john-travolta-hoarding.gif'
-          />
+          <Image borderRadius={10} boxSize={300} src={johnTravolta} />
           <Text marginTop={5}>Let's add some games to this desolate cart!</Text>
         </>
       )}

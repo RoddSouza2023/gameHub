@@ -1,4 +1,5 @@
 import { Box, Container, Image, Text } from "@chakra-ui/react";
+import sadbender from "../assets/futurama-bender.gif";
 import React from "react";
 
 function NoGamesFound() {
@@ -8,11 +9,7 @@ function NoGamesFound() {
         <Text fontFamily={"Chalkduster, fantasy"} marginY={5}>
           We're sorry. No matches were found for your search
         </Text>
-        <Image
-          boxShadow={"0 0 20px black"}
-          borderRadius={10}
-          src='src/assets/futurama-bender.gif'
-        />
+        <Image boxShadow={"0 0 20px black"} borderRadius={10} src={sadbender} />
         <Text fontFamily={"Chalkduster, fantasy"} marginY={5}>
           Please try again with different words or categories
         </Text>

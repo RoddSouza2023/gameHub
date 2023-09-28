@@ -17,6 +17,7 @@ import useGamesDetails from "../hooks/useGameDetails";
 import { BsArrowBarLeft, BsCartPlus } from "react-icons/bs";
 import useUpdateCart from "../hooks/useUpdateCart";
 import useLocalCart from "../hooks/useLocalCart";
+import "../styles/gameRating.css";
 
 function DetailsPage({ setCartLength, cartLength, isLoggedIn }) {
   const token = localStorage?.accessToken || null;
@@ -49,11 +50,16 @@ function DetailsPage({ setCartLength, cartLength, isLoggedIn }) {
           <Text marginX={5}>Average Playtime: {game?.playtime}</Text>
         </Flex>
 
-        <Box alignSelf={"baseline"}>
-          {!isLoading && <Text>{game?.rating} / 5</Text>}
+        <Box alignSelf={"baseline"} className='stars-container'>
           <Text alignSelf={"baseline"} fontSize={40}>
             {game?.name}
           </Text>
+          {!isLoading && (
+            <div
+              className='Stars'
+              style={{ "--rating": `${game?.rating}` }}
+            ></div>
+          )}
         </Box>
         <HStack
           alignSelf={"flex-start"}
