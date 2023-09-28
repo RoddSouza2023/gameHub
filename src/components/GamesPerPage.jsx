@@ -1,7 +1,7 @@
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
 
-function GamesPerPage({ setGamesPerPage, gamesPerPage }) {
+function GamesPerPage({ setGamesPerPage, gamesPerPage, setCurrentPage }) {
   const sortOrders = [
     { value: 8, label: "8" },
     { value: 16, label: "16" },
@@ -18,7 +18,10 @@ function GamesPerPage({ setGamesPerPage, gamesPerPage }) {
         <MenuList>
           {sortOrders.map((order) => (
             <MenuItem
-              onClick={() => setGamesPerPage(order.value)}
+              onClick={() => {
+                setGamesPerPage(order.value);
+                setCurrentPage(1);
+              }}
               key={order.value}
               value={order.value}
             >

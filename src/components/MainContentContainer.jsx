@@ -59,6 +59,7 @@ function MainContentContainer({
               <GamesPerPage
                 gamesPerPage={gamesPerPage}
                 setGamesPerPage={setGamesPerPage}
+                setCurrentPage={setCurrentPage}
               />
               {(gameQuery.genre ||
                 gameQuery.platform ||
