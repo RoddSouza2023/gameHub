@@ -11,7 +11,6 @@ import {
 } from "@chakra-ui/react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
-import Rating from "@mui/material/Rating";
 import { iconMap } from "./PlatformIconList";
 import ScreenshotCarousel from "./ScreenshotCarousel";
 import useGamesDetails from "../hooks/useGameDetails";
