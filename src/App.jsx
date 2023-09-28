@@ -37,7 +37,7 @@ function App() {
       });
       setCartLength(length);
     } else {
-      JSON.parse(localStorage.getItem("guest_cart")).forEach((item) => {
+      JSON.parse(localStorage.getItem("guest_cart") || "[]").forEach((item) => {
         length += item.quantity;
       });
       setCartLength(length);

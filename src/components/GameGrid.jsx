@@ -6,23 +6,7 @@ import NoGamesFound from "./NoGamesFound";
 
 function GameGrid({ data, error, isLoading }) {
   const skeletons = [
-    "a1",
-    "b1",
-    "c1",
-    "d1",
-    "e1",
-    "f1",
-    "g1",
-    "h1",
-    "i1",
-    "j1",
-    "k1",
-    "l1",
-    "m1",
-    "n1",
-    "o1",
-    "p1",
-    "q1",
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
   ];
 
   if (error) {
@@ -44,15 +28,13 @@ function GameGrid({ data, error, isLoading }) {
               <GameCardSkeleton />
             </GameCardContainer>
           ))}
-        {display ? (
-          data?.map((game) => (
-            <GameCardContainer key={game._id}>
-              <GameCard game={game} />
-            </GameCardContainer>
-          ))
-        ) : (
-          <NoGamesFound />
-        )}
+        {display
+          ? data?.map((game) => (
+              <GameCardContainer key={game._id}>
+                <GameCard game={game} />
+              </GameCardContainer>
+            ))
+          : !isLoading && <NoGamesFound />}
       </SimpleGrid>
     </>
   );

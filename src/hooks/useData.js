@@ -16,7 +16,6 @@ const useData = (endpoint, requestConfig={}, deps=[]) => {
     apiClient
       .get(endpoint, {signal: controller.signal, ...requestConfig})
       .then((res) => {
-
         setData(res.data.games);
         setLoading(false)
       })
