@@ -1,7 +1,7 @@
 import React from "react";
-import useUserDetails from "../hooks/useUserDetails";
-import { Box, Button, Container, Spinner, Text } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { Box, Button, Container, Spinner, Text } from "@chakra-ui/react";
+import useUserDetails from "../hooks/useUserDetails";
 
 function UserProfile({ token }) {
   const { response, error, isLoading } = useUserDetails(token);

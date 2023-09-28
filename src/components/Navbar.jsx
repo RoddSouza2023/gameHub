@@ -1,10 +1,10 @@
 import { HStack, Hide, Icon, Image, Show, Text } from "@chakra-ui/react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 import logo from "../assets/gaming-austro.jpg";
 import ColorModeSwitch from "./ColorModeSwitch";
 import SearchInput from "./SearchInput";
 import MenuDrawer from "./MenuDrawer";
-import { useNavigate } from "react-router-dom";
 import { pulse } from "../animations/navbarAnimation";
 import "../styles/cartBagde.css";
 

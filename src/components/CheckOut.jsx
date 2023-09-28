@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
   Container,
   VStack,
   HStack,
-  Icon,
   Image,
   Text,
-  Tag,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import PageNotFound from "./PageNotFound";

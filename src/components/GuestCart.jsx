@@ -12,8 +12,8 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
-import useLocalCart from "../hooks/useLocalCart";
 import { useNavigate } from "react-router-dom";
+import useLocalCart from "../hooks/useLocalCart";
 import johnTravolta from "../assets/john-travolta-hoarding.gif";
 
 function GuestCart({ cartLength, setCartLength }) {

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Box,
   Button,
@@ -7,14 +8,13 @@ import {
   IconButton,
   Text,
 } from "@chakra-ui/react";
+import { RepeatIcon } from "@chakra-ui/icons";
 import GameGrid from "./GameGrid";
 import PlatformSelector from "./PlatformSelector";
 import SortSelector from "./SortSelector";
 import GameHeading from "./GameHeading";
-import useGames from "../hooks/useGames";
-import { RepeatIcon } from "@chakra-ui/icons";
-import { useState } from "react";
 import GamesPerPage from "./GamesPerPage";
+import useGames from "../hooks/useGames";
 
 function MainContentContainer({
   setGameQuery,

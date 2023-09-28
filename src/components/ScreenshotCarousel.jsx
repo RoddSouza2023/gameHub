@@ -1,7 +1,8 @@
-import { Box, Image } from "@chakra-ui/react";
 import React from "react";
+import { Box } from "@chakra-ui/react";
 import { Carousel } from "react-responsive-carousel";
-import "./../styles/carousel.css";
+import "../styles/carousel.min.css";
+import "../styles/carousel.css";
 
 function ScreenshotCarousel({ screenshots }) {
   return (

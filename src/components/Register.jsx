@@ -9,9 +9,9 @@ import {
   InputRightElement,
   Text,
 } from "@chakra-ui/react";
-import { AiOutlineEye } from "react-icons/ai";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AiOutlineEye } from "react-icons/ai";
 import useRegister from "../hooks/useRegister";
 
 function Register() {

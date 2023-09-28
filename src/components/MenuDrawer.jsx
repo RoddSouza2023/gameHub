@@ -18,8 +18,8 @@ import {
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { useRef } from "react";
-import GenreList from "./GenreList";
 import { useLocation, useNavigate } from "react-router-dom";
+import GenreList from "./GenreList";
 import ColorModeSwitch from "./ColorModeSwitch";
 import "../styles/cartBagde.css";
 
