@@ -78,7 +78,12 @@ function MainContentContainer({
               )}
             </HStack>
           </Box>
-          <GameGrid data={currentGames} error={error} isLoading={isLoading} />
+          <GameGrid
+            gameQuery={gameQuery}
+            data={currentGames}
+            error={error}
+            isLoading={isLoading}
+          />
           <Container marginY={5} centerContent>
             {maxPageNumber > 1 && (
               <HStack>
