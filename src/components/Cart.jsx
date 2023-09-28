@@ -13,6 +13,7 @@ import {
 import { useEffect, useState } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import useCart from "../hooks/useCart";
+import johnTravolta from "../assets/john-travolta-hoarding.gif";
 import { useNavigate } from "react-router-dom";
 import useUpdateCart from "../hooks/useUpdateCart";
 
@@ -49,11 +50,7 @@ function Cart({ cartLength, setCartLength }) {
       </Text>
       {products?.length === 0 && (
         <>
-          <Image
-            borderRadius={10}
-            boxSize={300}
-            src='src/assets/john-travolta-hoarding.gif'
-          />
+          <Image borderRadius={10} boxSize={300} src={johnTravolta} />
           <Text marginTop={5}>Let's add some games to this desolate cart!</Text>
         </>
       )}
@@ -85,7 +82,7 @@ function Cart({ cartLength, setCartLength }) {
                   onClick={() => navigate(`/games/${product.slug}`)}
                 />
 
-                <Box textAlign={"left"}>
+                <Box>
                   <Show above='sm'>
                     <Text
                       _hover={{ cursor: "pointer", fontWeight: "bold" }}
