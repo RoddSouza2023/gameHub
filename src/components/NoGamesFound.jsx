@@ -11,7 +11,7 @@ function NoGamesFound() {
         <Image
           boxShadow={"0 0 20px black"}
           borderRadius={10}
-          src='../assets/futurama-bender.gif'
+          src='src/assets/futurama-bender.gif'
         />
         <Text fontFamily={"Chalkduster, fantasy"} marginY={5}>
           Please try again with different words or categories

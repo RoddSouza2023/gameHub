@@ -12,7 +12,7 @@ function PageNotFound() {
         <Image
           marginY={10}
           borderRadius={"full"}
-          src='../assets/not_found.gif'
+          src='src/assets/not_found.gif'
           boxShadow={"0 0 20px black"}
         />
         <Text fontSize={20} fontFamily={"Chalkduster, fantasy"}>

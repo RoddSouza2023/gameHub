@@ -51,7 +51,7 @@ function GuestCart({ cartLength, setCartLength }) {
           <Image
             borderRadius={10}
             boxSize={300}
-            src='../assets/john-travolta-hoarding.gif'
+            src='src/assets/john-travolta-hoarding.gif'
           />
           <Text marginTop={5}>Let's add some games to this desolate cart!</Text>
         </>
