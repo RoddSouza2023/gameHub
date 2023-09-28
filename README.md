@@ -1,8 +1,10 @@
-# React + Vite
+# Game Store
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Front part of a full stack project.
 
-Currently, two official plugins are available:
+Project was build with Vite React for the frontend. Along with Chakra UI for most of the styling.
+Features a friendly UI and rescalable between different devices. Filtering was implemented with custom 
+backend which was build with Express and Node.js. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Backend repo [link](https://github.com/RoddSouza2023/caps-backend).
+
