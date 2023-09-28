@@ -35,11 +35,9 @@ function GameGrid({ data, error, isLoading, gameQuery }) {
               </GameCardContainer>
             ))
           : !isLoading &&
-            !(
-              !gameQuery.platfrom &&
-              !gameQuery.genre &&
-              !gameQuery.sortOrder
-            ) && <NoGamesFound />}
+            !gameQuery.platfrom &&
+            !gameQuery.genre &&
+            !gameQuery.sortOrder && <NoGamesFound />}
       </SimpleGrid>
     </>
   );
