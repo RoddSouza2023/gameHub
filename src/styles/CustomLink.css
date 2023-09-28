@@ -1,0 +1,8 @@
+.custom-link {
+  color: rgb(145, 205, 154);
+  &:hover {
+    text-decoration: underline;
+    z-index: 9;
+    font-weight: bold;
+  }
+};

@@ -1,8 +1,15 @@
-import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react"
-import { BsChevronDown } from "react-icons/bs"
+import {
+  Button,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Show,
+  Hide,
+} from "@chakra-ui/react";
+import { BsChevronDown } from "react-icons/bs";
 
-function SortSelector({ onSelectSortOrder, sortOrder }) {
-  
+function SortSelector({ onSelectSortOrder, sortOrder, setCurrentPage }) {
   const sortOrders = [
     { value: "", label: "Relevance" },
     { value: "-added", label: "Date added" },
@@ -10,11 +17,11 @@ function SortSelector({ onSelectSortOrder, sortOrder }) {
     { value: "-released", label: "Release date" },
     { value: "-metacritic", label: "Popularity" },
     { value: "-rating", label: "Average rating" },
-  ]
+  ];
 
   const currentSortOrder = sortOrders.find(
     (order) => order.value === sortOrder
-  )
+  );
 
   return (
     <>
@@ -25,7 +32,10 @@ function SortSelector({ onSelectSortOrder, sortOrder }) {
         <MenuList>
           {sortOrders.map((order) => (
             <MenuItem
-              onClick={() => onSelectSortOrder(order.value)}
+              onClick={() => {
+                onSelectSortOrder(order.value);
+                setCurrentPage(1);
+              }}
               key={order.value}
               value={order.value}
             >
@@ -35,7 +45,7 @@ function SortSelector({ onSelectSortOrder, sortOrder }) {
         </MenuList>
       </Menu>
     </>
-  )
+  );
 }
 
-export default SortSelector
+export default SortSelector;

@@ -1,17 +1,15 @@
 import {
   Button,
   HStack,
-  Heading,
   Image,
   List,
   ListItem,
   Spinner,
-} from "@chakra-ui/react"
-import useGenres from "../hooks/useGenres"
+} from "@chakra-ui/react";
+import useGenres from "../hooks/useGenres";
 import getCroppedImageUrl from "../services/image-url";
 
-function GenreList({ onSelectGenre, selectedGenre }) {
-
+function GenreList({ onSelectGenre, selectedGenre, onClose, setCurrentPage }) {
   const { data, isLoading, error } = useGenres();
   //renders nothing if there is an error while retrieving the genre data from server
   if (error) return null;
@@ -20,26 +18,27 @@ function GenreList({ onSelectGenre, selectedGenre }) {
 
   return (
     <>
-      <Heading fontSize="xl" marginBottom={3}>
-        Genres
-      </Heading>
       <List>
         {data.map((genre) => (
-          <ListItem key={genre.id} paddingY="5px">
+          <ListItem key={genre.id} paddingY='5px'>
             <HStack>
               <Image
-                boxSize="32px"
+                boxSize='32px'
                 borderRadius={8}
-                objectFit="cover"
+                objectFit='cover'
                 src={getCroppedImageUrl(genre.image_background)}
               />
               <Button
-                textAlign="left"
-                whiteSpace="normal"
+                textAlign='left'
+                whiteSpace='normal'
                 fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
-                onClick={() => onSelectGenre(genre)}
-                fontSize="lg"
-                variant="link"
+                onClick={() => {
+                  onSelectGenre(genre);
+                  setCurrentPage(1);
+                  onClose && setTimeout(() => onClose(), 200);
+                }}
+                fontSize='lg'
+                variant='link'
               >
                 {genre.name}
               </Button>
@@ -48,7 +47,7 @@ function GenreList({ onSelectGenre, selectedGenre }) {
         ))}
       </List>
     </>
-  )
+  );
 }
 
-export default GenreList
+export default GenreList;

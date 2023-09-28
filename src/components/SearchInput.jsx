@@ -1,14 +1,16 @@
-import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react"
+import { DeleteIcon } from "@chakra-ui/icons"
+import { IconButton, Input, InputGroup, InputLeftElement, InputRightElement } from "@chakra-ui/react"
 import { useRef } from "react"
 import { BsSearch } from "react-icons/bs"
 
-function SearchInput({ onSearch }) {
-  const ref = useRef(null);
+function SearchInput({ onSearch }) { 
+  const ref = useRef(null)
+
   return (
     <form
       onSubmit={(event) => {
-        event.preventDefault();
-        if (ref.current) onSearch(ref.current.value);
+        event.preventDefault()
+        if (ref.current) onSearch(ref.current.value)
       }}
     >
       <InputGroup>
@@ -19,6 +21,12 @@ function SearchInput({ onSearch }) {
           placeholder="Search Games..."
           variant="filled"
         />
+        <InputRightElement children={
+          <IconButton onClick={() => {
+            ref.current.value = null
+            onSearch(ref.current.value)
+          }} icon={<DeleteIcon />} background={'unset'} isRound/>
+        }/>
       </InputGroup>
     </form>
   )

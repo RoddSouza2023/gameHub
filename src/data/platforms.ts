@@ -365,231 +365,231 @@ export default [
         }
       ]
     },
-    {
-      "id": 9,
-      "name": "Atari",
-      "slug": "atari",
-      "platforms": [
-        {
-          "id": 28,
-          "name": "Atari 7800",
-          "slug": "atari-7800",
-          "games_count": 64,
-          "image_background": "https://media.rawg.io/media/screenshots/565/56504b28b184dbc630a7de118e39d822.jpg",
-          "image": null,
-          "year_start": null,
-          "year_end": null
-        },
-        {
-          "id": 31,
-          "name": "Atari 5200",
-          "slug": "atari-5200",
-          "games_count": 64,
-          "image_background": "https://media.rawg.io/media/screenshots/61a/61a60e3ee55941387681eaa59e3becbf.jpg",
-          "image": null,
-          "year_start": null,
-          "year_end": null
-        },
-        {
-          "id": 23,
-          "name": "Atari 2600",
-          "slug": "atari-2600",
-          "games_count": 286,
-          "image_background": "https://media.rawg.io/media/screenshots/b12/b12ed274eed80e4aced37badf228d1cf.jpg",
-          "image": null,
-          "year_start": null,
-          "year_end": null
-        },
-        {
-          "id": 22,
-          "name": "Atari Flashback",
-          "slug": "atari-flashback",
-          "games_count": 30,
-          "image_background": "https://media.rawg.io/media/screenshots/2aa/2aa07f58491e14b0183333f8956bc802.jpg",
-          "image": null,
-          "year_start": null,
-          "year_end": null
-        },
-        {
-          "id": 25,
-          "name": "Atari 8-bit",
-          "slug": "atari-8-bit",
-          "games_count": 306,
-          "image_background": "https://media.rawg.io/media/games/876/8764efc52fba503a00af64a2cd51f66c.jpg",
-          "image": null,
-          "year_start": null,
-          "year_end": null
-        },
-        {
-          "id": 34,
-          "name": "Atari ST",
-          "slug": "atari-st",
-          "games_count": 835,
-          "image_background": "https://media.rawg.io/media/games/32d/32d851318b042aba3df62e52d868d599.jpg",
-          "image": null,
-          "year_start": null,
-          "year_end": null
-        },
-        {
-          "id": 46,
-          "name": "Atari Lynx",
-          "slug": "atari-lynx",
-          "games_count": 56,
-          "image_background": "https://media.rawg.io/media/screenshots/575/575b2838392ed177dd7d2c734c682f93.jpg",
-          "image": null,
-          "year_start": null,
-          "year_end": null
-        },
-        {
-          "id": 50,
-          "name": "Atari XEGS",
-          "slug": "atari-xegs",
-          "games_count": 22,
-          "image_background": "https://media.rawg.io/media/screenshots/769/7691726d70c23c029903df08858df001.jpg",
-          "image": null,
-          "year_start": null,
-          "year_end": null
-        },
-        {
-          "id": 112,
-          "name": "Jaguar",
-          "slug": "jaguar",
-          "games_count": 37,
-          "image_background": "https://media.rawg.io/media/games/855/8552687245f888ba388bc6ec0dcc3947.jpg",
-          "image": null,
-          "year_start": null,
-          "year_end": null
-        }
-      ]
-    },
-    {
-      "id": 10,
-      "name": "Commodore / Amiga",
-      "slug": "commodore-amiga",
-      "platforms": [
-        {
-          "id": 166,
-          "name": "Commodore / Amiga",
-          "slug": "commodore-amiga",
-          "games_count": 2076,
-          "image_background": "https://media.rawg.io/media/games/cfd/cfdfaaddca4f351b27f965a2f97af0f4.jpg",
-          "image": null,
-          "year_start": null,
-          "year_end": null
-        }
-      ]
-    },
-    {
-      "id": 11,
-      "name": "SEGA",
-      "slug": "sega",
-      "platforms": [
-        {
-          "id": 167,
-          "name": "Genesis",
-          "slug": "genesis",
-          "games_count": 828,
-          "image_background": "https://media.rawg.io/media/games/637/637d7dc2f44d0f6ddd3ee2c0b1366962.jpg",
-          "image": null,
-          "year_start": null,
-          "year_end": null
-        },
-        {
-          "id": 107,
-          "name": "SEGA Saturn",
-          "slug": "sega-saturn",
-          "games_count": 348,
-          "image_background": "https://media.rawg.io/media/games/18f/18f130a198e4c6f1970ad1f36dda7d1f.jpg",
-          "image": null,
-          "year_start": null,
-          "year_end": null
-        },
-        {
-          "id": 119,
-          "name": "SEGA CD",
-          "slug": "sega-cd",
-          "games_count": 160,
-          "image_background": "https://media.rawg.io/media/screenshots/364/364cb96fad83ff293e6359394a7cc51b.jpg",
-          "image": null,
-          "year_start": null,
-          "year_end": null
-        },
-        {
-          "id": 117,
-          "name": "SEGA 32X",
-          "slug": "sega-32x",
-          "games_count": 46,
-          "image_background": "https://media.rawg.io/media/screenshots/d9f/d9f308b5d824ae8f047edc0a998a587b.jpg",
-          "image": null,
-          "year_start": null,
-          "year_end": null
-        },
-        {
-          "id": 74,
-          "name": "SEGA Master System",
-          "slug": "sega-master-system",
-          "games_count": 225,
-          "image_background": "https://media.rawg.io/media/screenshots/cbc/cbca22c381d18a8df6e9361a33f8a899.jpg",
-          "image": null,
-          "year_start": null,
-          "year_end": null
-        },
-        {
-          "id": 106,
-          "name": "Dreamcast",
-          "slug": "dreamcast",
-          "games_count": 357,
-          "image_background": "https://media.rawg.io/media/screenshots/6e4/6e45a8e19beb5d510813f10f8af4eedc.jpg",
-          "image": null,
-          "year_start": null,
-          "year_end": null
-        },
-        {
-          "id": 77,
-          "name": "Game Gear",
-          "slug": "game-gear",
-          "games_count": 218,
-          "image_background": "https://media.rawg.io/media/games/470/47058af09b864c2d211a08271eccfb4f.jpg",
-          "image": null,
-          "year_start": null,
-          "year_end": null
-        }
-      ]
-    },
-    {
-      "id": 12,
-      "name": "3DO",
-      "slug": "3do",
-      "platforms": [
-        {
-          "id": 111,
-          "name": "3DO",
-          "slug": "3do",
-          "games_count": 95,
-          "image_background": "https://media.rawg.io/media/screenshots/180/180b5f6e5d8c770bbbf941b9875046b6.jpg",
-          "image": null,
-          "year_start": null,
-          "year_end": null
-        }
-      ]
-    },
-    {
-      "id": 13,
-      "name": "Neo Geo",
-      "slug": "neo-geo",
-      "platforms": [
-        {
-          "id": 12,
-          "name": "Neo Geo",
-          "slug": "neogeo",
-          "games_count": 116,
-          "image_background": "https://media.rawg.io/media/screenshots/2d2/2d2021a0b04bd5fea05586a4681cae1f.jpg",
-          "image": null,
-          "year_start": null,
-          "year_end": null
-        }
-      ]
-    },
+    // {
+    //   "id": 9,
+    //   "name": "Atari",
+    //   "slug": "atari",
+    //   "platforms": [
+    //     {
+    //       "id": 28,
+    //       "name": "Atari 7800",
+    //       "slug": "atari-7800",
+    //       "games_count": 64,
+    //       "image_background": "https://media.rawg.io/media/screenshots/565/56504b28b184dbc630a7de118e39d822.jpg",
+    //       "image": null,
+    //       "year_start": null,
+    //       "year_end": null
+    //     },
+    //     {
+    //       "id": 31,
+    //       "name": "Atari 5200",
+    //       "slug": "atari-5200",
+    //       "games_count": 64,
+    //       "image_background": "https://media.rawg.io/media/screenshots/61a/61a60e3ee55941387681eaa59e3becbf.jpg",
+    //       "image": null,
+    //       "year_start": null,
+    //       "year_end": null
+    //     },
+    //     {
+    //       "id": 23,
+    //       "name": "Atari 2600",
+    //       "slug": "atari-2600",
+    //       "games_count": 286,
+    //       "image_background": "https://media.rawg.io/media/screenshots/b12/b12ed274eed80e4aced37badf228d1cf.jpg",
+    //       "image": null,
+    //       "year_start": null,
+    //       "year_end": null
+    //     },
+    //     {
+    //       "id": 22,
+    //       "name": "Atari Flashback",
+    //       "slug": "atari-flashback",
+    //       "games_count": 30,
+    //       "image_background": "https://media.rawg.io/media/screenshots/2aa/2aa07f58491e14b0183333f8956bc802.jpg",
+    //       "image": null,
+    //       "year_start": null,
+    //       "year_end": null
+    //     },
+    //     {
+    //       "id": 25,
+    //       "name": "Atari 8-bit",
+    //       "slug": "atari-8-bit",
+    //       "games_count": 306,
+    //       "image_background": "https://media.rawg.io/media/games/876/8764efc52fba503a00af64a2cd51f66c.jpg",
+    //       "image": null,
+    //       "year_start": null,
+    //       "year_end": null
+    //     },
+    //     {
+    //       "id": 34,
+    //       "name": "Atari ST",
+    //       "slug": "atari-st",
+    //       "games_count": 835,
+    //       "image_background": "https://media.rawg.io/media/games/32d/32d851318b042aba3df62e52d868d599.jpg",
+    //       "image": null,
+    //       "year_start": null,
+    //       "year_end": null
+    //     },
+    //     {
+    //       "id": 46,
+    //       "name": "Atari Lynx",
+    //       "slug": "atari-lynx",
+    //       "games_count": 56,
+    //       "image_background": "https://media.rawg.io/media/screenshots/575/575b2838392ed177dd7d2c734c682f93.jpg",
+    //       "image": null,
+    //       "year_start": null,
+    //       "year_end": null
+    //     },
+    //     {
+    //       "id": 50,
+    //       "name": "Atari XEGS",
+    //       "slug": "atari-xegs",
+    //       "games_count": 22,
+    //       "image_background": "https://media.rawg.io/media/screenshots/769/7691726d70c23c029903df08858df001.jpg",
+    //       "image": null,
+    //       "year_start": null,
+    //       "year_end": null
+    //     },
+    //     {
+    //       "id": 112,
+    //       "name": "Jaguar",
+    //       "slug": "jaguar",
+    //       "games_count": 37,
+    //       "image_background": "https://media.rawg.io/media/games/855/8552687245f888ba388bc6ec0dcc3947.jpg",
+    //       "image": null,
+    //       "year_start": null,
+    //       "year_end": null
+    //     }
+    //   ]
+    // },
+    // {
+    //   "id": 10,
+    //   "name": "Commodore / Amiga",
+    //   "slug": "commodore-amiga",
+    //   "platforms": [
+    //     {
+    //       "id": 166,
+    //       "name": "Commodore / Amiga",
+    //       "slug": "commodore-amiga",
+    //       "games_count": 2076,
+    //       "image_background": "https://media.rawg.io/media/games/cfd/cfdfaaddca4f351b27f965a2f97af0f4.jpg",
+    //       "image": null,
+    //       "year_start": null,
+    //       "year_end": null
+    //     }
+    //   ]
+    // },
+    // {
+    //   "id": 11,
+    //   "name": "SEGA",
+    //   "slug": "sega",
+    //   "platforms": [
+    //     {
+    //       "id": 167,
+    //       "name": "Genesis",
+    //       "slug": "genesis",
+    //       "games_count": 828,
+    //       "image_background": "https://media.rawg.io/media/games/637/637d7dc2f44d0f6ddd3ee2c0b1366962.jpg",
+    //       "image": null,
+    //       "year_start": null,
+    //       "year_end": null
+    //     },
+    //     {
+    //       "id": 107,
+    //       "name": "SEGA Saturn",
+    //       "slug": "sega-saturn",
+    //       "games_count": 348,
+    //       "image_background": "https://media.rawg.io/media/games/18f/18f130a198e4c6f1970ad1f36dda7d1f.jpg",
+    //       "image": null,
+    //       "year_start": null,
+    //       "year_end": null
+    //     },
+    //     {
+    //       "id": 119,
+    //       "name": "SEGA CD",
+    //       "slug": "sega-cd",
+    //       "games_count": 160,
+    //       "image_background": "https://media.rawg.io/media/screenshots/364/364cb96fad83ff293e6359394a7cc51b.jpg",
+    //       "image": null,
+    //       "year_start": null,
+    //       "year_end": null
+    //     },
+    //     {
+    //       "id": 117,
+    //       "name": "SEGA 32X",
+    //       "slug": "sega-32x",
+    //       "games_count": 46,
+    //       "image_background": "https://media.rawg.io/media/screenshots/d9f/d9f308b5d824ae8f047edc0a998a587b.jpg",
+    //       "image": null,
+    //       "year_start": null,
+    //       "year_end": null
+    //     },
+    //     {
+    //       "id": 74,
+    //       "name": "SEGA Master System",
+    //       "slug": "sega-master-system",
+    //       "games_count": 225,
+    //       "image_background": "https://media.rawg.io/media/screenshots/cbc/cbca22c381d18a8df6e9361a33f8a899.jpg",
+    //       "image": null,
+    //       "year_start": null,
+    //       "year_end": null
+    //     },
+    //     {
+    //       "id": 106,
+    //       "name": "Dreamcast",
+    //       "slug": "dreamcast",
+    //       "games_count": 357,
+    //       "image_background": "https://media.rawg.io/media/screenshots/6e4/6e45a8e19beb5d510813f10f8af4eedc.jpg",
+    //       "image": null,
+    //       "year_start": null,
+    //       "year_end": null
+    //     },
+    //     {
+    //       "id": 77,
+    //       "name": "Game Gear",
+    //       "slug": "game-gear",
+    //       "games_count": 218,
+    //       "image_background": "https://media.rawg.io/media/games/470/47058af09b864c2d211a08271eccfb4f.jpg",
+    //       "image": null,
+    //       "year_start": null,
+    //       "year_end": null
+    //     }
+    //   ]
+    // },
+    // {
+    //   "id": 12,
+    //   "name": "3DO",
+    //   "slug": "3do",
+    //   "platforms": [
+    //     {
+    //       "id": 111,
+    //       "name": "3DO",
+    //       "slug": "3do",
+    //       "games_count": 95,
+    //       "image_background": "https://media.rawg.io/media/screenshots/180/180b5f6e5d8c770bbbf941b9875046b6.jpg",
+    //       "image": null,
+    //       "year_start": null,
+    //       "year_end": null
+    //     }
+    //   ]
+    // },
+    // {
+    //   "id": 13,
+    //   "name": "Neo Geo",
+    //   "slug": "neo-geo",
+    //   "platforms": [
+    //     {
+    //       "id": 12,
+    //       "name": "Neo Geo",
+    //       "slug": "neogeo",
+    //       "games_count": 116,
+    //       "image_background": "https://media.rawg.io/media/screenshots/2d2/2d2021a0b04bd5fea05586a4681cae1f.jpg",
+    //       "image": null,
+    //       "year_start": null,
+    //       "year_end": null
+    //     }
+    //   ]
+    // },
     {
       "id": 14,
       "name": "Web",
