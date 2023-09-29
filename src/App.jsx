@@ -114,7 +114,7 @@ function App() {
         <Route path='/checkout' element={<CheckOut token={token} />}></Route>
         <Route
           path='/logout'
-          element={!isLoggedIn && token ? <Logout /> : <PageNotFound />}
+          element={token ? <Logout /> : <PageNotFound />}
         ></Route>
       </Routes>
     </>

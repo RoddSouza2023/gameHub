@@ -11,8 +11,10 @@ function Logout() {
       localStorage.removeItem("accessToken");
     };
 
-    logOut();
-    setTimeout(() => navigate("/"), 2000);
+    setTimeout(() => {
+      logOut();
+      navigate("/");
+    }, 2000);
   }, []);
   return (
     <Container centerContent>
