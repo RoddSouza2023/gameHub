@@ -5,6 +5,7 @@ function GamesPerPage({ setGamesPerPage, gamesPerPage, setCurrentPage }) {
   const sortOrders = [
     { value: 8, label: "8" },
     { value: 16, label: "16" },
+    { value: 20, label: "20" },
     { value: 32, label: "32" },
     { value: 60, label: "60" },
   ];
