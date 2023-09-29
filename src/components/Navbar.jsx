@@ -19,13 +19,6 @@ function Navbar({
 }) {
   const navigate = useNavigate();
 
-  const logOut = () => {
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("accessToken");
-    setIsLoggedIn(false);
-    navigate("/");
-  };
-
   return (
     <HStack padding='10px' boxShadow={"0 0 5px black"} width={"100%"}>
       <Image
@@ -40,7 +33,7 @@ function Navbar({
       ></Image>
       <Show below='lg'>
         <MenuDrawer
-          logOut={logOut}
+          setIsLoggedIn={setIsLoggedIn}
           isLoggedIn={isLoggedIn}
           cartLength={cartLength}
           onSelectGenre={onSelectGenre}
@@ -68,7 +61,10 @@ function Navbar({
             </Text>
             <Text
               _hover={{ textDecoration: "underline", cursor: "pointer" }}
-              onClick={() => logOut()}
+              onClick={() => {
+                setIsLoggedIn(false);
+                navigate("/logout");
+              }}
             >
               Logout
             </Text>

@@ -24,7 +24,7 @@ import ColorModeSwitch from "./ColorModeSwitch";
 import "../styles/cartBagde.css";
 
 function MenuDrawer({
-  logOut,
+  setIsLoggedIn,
   isLoggedIn,
   onSelectGenre,
   selectedGenre,
@@ -86,9 +86,9 @@ function MenuDrawer({
                       <Divider />
                       <Text
                         onClick={() => {
-                          logOut();
                           onClose(true);
-                          setTimeout(navigate("/", 400));
+                          setIsLoggedIn(false);
+                          navigate("/logout");
                         }}
                       >
                         Logout
