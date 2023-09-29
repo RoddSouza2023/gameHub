@@ -13,6 +13,7 @@ import GuestCart from "./components/GuestCart";
 import UserProfile from "./components/UserProfile";
 import ChangePassword from "./components/ChangePassword";
 import useCart from "./hooks/useCart";
+import Logout from "./components/Logout";
 
 function App() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -111,6 +112,10 @@ function App() {
           }
         ></Route>
         <Route path='/checkout' element={<CheckOut token={token} />}></Route>
+        <Route
+          path='/logout'
+          element={!isLoggedIn && token ? <Logout /> : <PageNotFound />}
+        ></Route>
       </Routes>
     </>
   );

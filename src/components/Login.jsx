@@ -70,9 +70,10 @@ function Login({ setIsLoggedIn }) {
           <Input
             id='password'
             type={visibility ? "password" : "text"}
-            onChange={(e) =>
-              setUserData({ ...userData, password: e.target.value })
-            }
+            onChange={(e) => {
+              setUserData({ ...userData, password: e.target.value });
+            }}
+            onKeyDown={(e) => e.key === "Enter" && handleLogin(userData)}
           />
           <InputRightElement
             children={
