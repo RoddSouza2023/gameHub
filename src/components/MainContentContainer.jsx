@@ -30,8 +30,8 @@ function MainContentContainer({
 
   const lastPostIndex = currentPage * gamesPerPage;
   const firstPostIndex = lastPostIndex - gamesPerPage;
-  const currentGames = data.slice(firstPostIndex, lastPostIndex);
-  const maxPageNumber = Math.ceil(data.length / gamesPerPage);
+  const currentGames = data.games?.slice(firstPostIndex, lastPostIndex);
+  const maxPageNumber = Math.ceil(data.games?.length / gamesPerPage);
 
   return (
     <>

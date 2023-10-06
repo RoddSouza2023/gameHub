@@ -16,6 +16,7 @@ import useCart from "./hooks/useCart";
 import Logout from "./components/Logout";
 
 function App() {
+  const token = localStorage.getItem("accessToken");
   const [currentPage, setCurrentPage] = useState(1);
   const [gameQuery, setGameQuery] = useState({
     platform: null,
@@ -25,15 +26,14 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem("isLoggedIn") || false
   );
-  const token = localStorage.getItem("accessToken");
-  const { getResponse } = useCart(token);
+  const { data } = useCart(token);
   const [cartLength, setCartLength] = useState(0);
-  const onSelectGenre = (genre) => setGameQuery({ ...gameQuery, genre });
 
+  const onSelectGenre = (genre) => setGameQuery({ ...gameQuery, genre });
   useEffect(() => {
     let length = 0;
     if (token) {
-      getResponse.cart?.forEach((item) => {
+      data?.cart?.forEach((item) => {
         length += item.quantity;
       });
       setCartLength(length);
@@ -43,7 +43,7 @@ function App() {
       });
       setCartLength(length);
     }
-  }, [getResponse, isLoggedIn]);
+  }, [data, isLoggedIn]);
 
   return (
     <>

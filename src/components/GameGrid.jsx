@@ -24,7 +24,7 @@ function GameGrid({ data, error, isLoading, gameQuery }) {
       >
         {isLoading &&
           skeletons.map((skeleton) => (
-            <GameCardContainer key={skeleton}>
+            <GameCardContainer isLoading={isLoading} key={skeleton}>
               <GameCardSkeleton />
             </GameCardContainer>
           ))}

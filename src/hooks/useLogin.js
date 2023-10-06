@@ -1,21 +1,17 @@
 import { useState } from "react";
+import { apiClient } from "../services/api-client";
 
 function useLogin() {
   const [response, setResponse] = useState({});
   const [error, setError] = useState(null);
 
   const handleLogin = async ({ email, password }) => {
-    const data = await fetch(`${import.meta.env.VITE_API_URL}/user`, {
-      method: "POST",
-      body: JSON.stringify({
+    const data = await apiClient.post("/user", {
         email: email,
         password: password,
-      }),
-      headers: {
-        "Content-type": "application/json",
-      },
     });
-    const res = await data.json();
+
+    const res = data.data;
     if (!res.success) { 
       setError(res.error);
       return;
