@@ -20,6 +20,7 @@ function SearchInput({ onSearch }) {
     <form
       onSubmit={(event) => {
         event.preventDefault();
+        console.log(ref.current.value);
         if (pathname !== "/") navigate("/");
         if (ref.current) onSearch(ref.current.value);
       }}

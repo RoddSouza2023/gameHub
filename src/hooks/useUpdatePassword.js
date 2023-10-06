@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { apiClient } from "../services/api-client";
 
 function useUpdatePassword() {
   const [response, setResponse] = useState({});
@@ -9,18 +10,13 @@ function useUpdatePassword() {
     try {
       setIsLoading(true);
 
-      const data = await fetch(`${import.meta.env.VITE_API_URL}/user/change_password`, {
-        method: "POST",
-        body: JSON.stringify({
-          token: token,
-          currentPassword: currentPassword,
-          newPassword: newPassword,
-        }),
-        headers: {
-          "Content-type": "application/json",
-        },
+      const data = await apiClient.post(`/user/change_password`, {
+        token: token,
+        currentPassword: currentPassword,
+        newPassword: newPassword,
       });
-      const res = await data.json();
+
+      const res = await data.data;
       if (!res.success) { 
         setIsLoading(false);
         setError(res.error);

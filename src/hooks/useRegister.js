@@ -1,22 +1,18 @@
 import { useState } from "react";
+import { apiClient } from "../services/api-client";
 
 function useRegister() {
   const [response, setResponse] = useState({});
   const [error, setError] = useState(null);
 
   const handleRegister = async ({ name, email, password }) => {
-    const data = await fetch(`${import.meta.env.VITE_API_URL}/user/signup`, {
-      method: "POST",
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        password: password,
-      }),
-      headers: {
-        "Content-type": "application/json",
-      },
+    const data = await apiClient.post("/user/signup", {
+      name: name,
+      email: email,
+      password: password,
     });
-    const res = await data.json();
+
+    const res = await data.data;
     if (!res.success) { 
       setError(res.error);
       return;

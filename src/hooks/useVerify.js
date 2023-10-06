@@ -1,21 +1,13 @@
 import { useState } from "react";
+import { apiClient } from "../services/api-client";
 
 function useVerify() {
   const [response, setResponse] = useState({});
   const [error, setError] = useState(null);
 
   const handleVerify = async ({ email, otp }) => {
-    const data = await fetch(`${import.meta.env.VITE_API_URL}/email_verification/verify`, {
-      method: "POST",
-      body: JSON.stringify({
-        email: email,
-        otp: otp,
-      }),
-      headers: {
-        "Content-type": "application/json",
-      },
-    });
-    const res = await data.json();
+    const data = await apiClient.post(`/email_verification/verify`, { email: email, otp: otp });
+    const res = await data.data;
     if (!res.success) { 
       setError(res.error);
       return;

@@ -4,9 +4,9 @@ import { Box, Button, Container, Spinner, Text } from "@chakra-ui/react";
 import useUserDetails from "../hooks/useUserDetails";
 
 function UserProfile({ token }) {
-  const { response, error, isLoading } = useUserDetails(token);
+  const { data, error, isLoading } = useUserDetails(token);
   const navigate = useNavigate();
-  const user = response?.userDetails;
+  const user = data?.userDetails;
 
   return (
     <Container>

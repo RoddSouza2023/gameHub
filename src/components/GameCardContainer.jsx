@@ -1,9 +1,9 @@
 import { Box } from "@chakra-ui/react";
 
-function GameCardContainer({ children }) {
+function GameCardContainer({ isLoading, children }) {
   return (
     <Box
-      _hover={{ transform: "scale(105%)" }}
+      _hover={!isLoading && { transform: "scale(105%)" }}
       boxSize={"md"}
       boxShadow='dark-lg'
       width='100%'

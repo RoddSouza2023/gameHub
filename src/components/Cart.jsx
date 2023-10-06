@@ -22,10 +22,9 @@ function Cart({ cartLength, setCartLength }) {
   const token = localStorage?.accessToken || null;
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
-  const { error, getResponse, isLoading } = useCart(token);
+  const { error, data, isLoading } = useCart(token);
   const { handleCartDeleteItem, handleCartUpdateQuantity } =
     useUpdateCart(token);
-
   const updateProducts = (quantity, passedProduct) => {
     const index = products.findIndex((item) => item.id === passedProduct.id);
     products[index].quantity = quantity;
@@ -40,8 +39,8 @@ function Cart({ cartLength, setCartLength }) {
   };
 
   useEffect(() => {
-    setProducts(getResponse.cart);
-  }, [getResponse]);
+    setProducts(data.cart);
+  }, [data]);
 
   return (
     <Container paddingY={"40px"}>

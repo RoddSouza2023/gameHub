@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Checkbox,
   CircularProgress,
   Container,
   FormControl,
@@ -11,6 +12,7 @@ import {
   InputGroup,
   InputRightElement,
   Text,
+  VStack,
 } from "@chakra-ui/react";
 import { AiOutlineEye } from "react-icons/ai";
 import React, { useEffect, useState } from "react";
@@ -20,6 +22,7 @@ import useLogin from "../hooks/useLogin";
 function Login({ setIsLoggedIn }) {
   const navigate = useNavigate();
   const [visibility, setVisibility] = useState(true);
+  const [demoUser, setDemoUser] = useState(false);
   const { handleLogin, response, error } = useLogin();
   const [userData, setUserData] = useState({
     email: "",
@@ -27,16 +30,18 @@ function Login({ setIsLoggedIn }) {
   });
 
   useEffect(() => {
+    setIsLoggedIn(response.success);
     if (response.success) {
-      localStorage.setItem("isLoggedIn", true);
-      setIsLoggedIn(response.success);
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
     }
   }, [response]);
 
-  if (response.success)
-    setTimeout(() => {
-      navigate("/");
-    }, 2000);
+  useEffect(() => {
+    if (demoUser)
+      setUserData({ email: "demouser@demo.com", password: "demouser" });
+  }, [demoUser]);
 
   return (
     <Box padding={10} textAlign={"center"}>
@@ -63,11 +68,13 @@ function Login({ setIsLoggedIn }) {
         <Input
           type='email'
           marginBottom={5}
+          isDisabled={demoUser}
           onChange={(e) => setUserData({ ...userData, email: e.target.value })}
         />
         <FormLabel>Password</FormLabel>
         <InputGroup>
           <Input
+            isDisabled={demoUser}
             id='password'
             type={visibility ? "password" : "text"}
             onChange={(e) => {
@@ -86,14 +93,18 @@ function Login({ setIsLoggedIn }) {
             }
           />
         </InputGroup>
-        <Button
-          marginTop={5}
-          onClick={async () => {
-            handleLogin(userData);
-          }}
-        >
-          Login
-        </Button>
+        <VStack>
+          <Checkbox onChange={() => setDemoUser(!demoUser)} marginTop={2}>
+            DemoUser
+          </Checkbox>
+          <Button
+            onClick={async () => {
+              handleLogin(userData);
+            }}
+          >
+            Login
+          </Button>
+        </VStack>
         <Text marginTop={5}>Don't have an account? </Text>
         <Container centerContent>
           <HStack>

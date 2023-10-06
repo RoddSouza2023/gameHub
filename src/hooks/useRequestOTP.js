@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { apiClient } from "../services/api-client";
 
 function useRequestOTP() {
   const [response, setResponse] = useState({});
@@ -9,16 +10,9 @@ function useRequestOTP() {
     try {
       setIsLoading(true);
 
-      const data = await fetch(`${import.meta.env.VITE_API_URL}/email_verification`, {
-        method: "POST",
-        body: JSON.stringify({
-          email: email,
-        }),
-        headers: {
-          "Content-type": "application/json",
-        },
-      });
-      const res = await data.json();
+      const data = await apiClient.post(`/email_verification`, { email: email });
+      
+      const res = await data.data;
       if (!res.success) { 
         setIsLoading(false);
         setError(res.error);

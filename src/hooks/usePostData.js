@@ -2,11 +2,10 @@ import { useEffect, useState } from "react";
 import { apiClient } from "../services/api-client";
 import { CanceledError } from "axios";
 
-const useData = (endpoint, requestConfig={}, deps=[]) => {
-
-    const [data, setData] = useState([]);
-    const [error, setError] = useState("");
-    const [isLoading, setLoading] = useState(false);
+const usePostData = (endpoint, requestConfig, deps=[]) => {
+  const [data, setData] = useState([]);
+  const [error, setError] = useState("");
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
 
@@ -14,22 +13,22 @@ const useData = (endpoint, requestConfig={}, deps=[]) => {
     setLoading(true);
 
     apiClient
-      .get(endpoint, {signal: controller.signal, ...requestConfig})
+      .post(endpoint, {signal: controller.signal, ...requestConfig})
       .then((res) => {
         setData(res.data);
         setLoading(false);
       })
       .catch((err) => {
-        if(err instanceof CanceledError) return;  
         setLoading(false);
-        setError(err.message);
+        if(err instanceof CanceledError) return;  
+        setError(err.response.data.error);
     });
 
     //clean up function
     return () => controller.abort();
     }, deps ? [...deps] : [])
 
-    return { data, error, isLoading}
+    return { data, error, isLoading }
 }
 
-export default useData;
+export default usePostData;

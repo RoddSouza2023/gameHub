@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import { useState } from 'react';
+import { apiClient } from '../services/api-client';
 
 function useUpdateCart(token) {
 const [updateReponse, setUpdateResponse] = useState({});
@@ -6,20 +7,15 @@ const [updateReponse, setUpdateResponse] = useState({});
    //Update item quantity in cart
    const handleCartUpdateQuantity = async (id, quantity) => {
     if (!token) return;
-    const data = await fetch(`${import.meta.env.VITE_API_URL}/user/cart/item_quantity`, {
-      method: "PATCH",
-      body: JSON.stringify({
-        token: token,
-        item: {
-          id: id,
-          quantity: quantity,
-        }
-      }),
-      headers: {
-        "Content-type": "application/json",
-      },
+    const data = await apiClient.patch(`/user/cart/item_quantity`, {
+      token: token,
+      item: {
+        id: id,
+        quantity: quantity,
+      }
     });
-    const res = await data.json();
+
+    const res = await data.data;
     if (!res.success) { 
       setError(res.error);
       return;
@@ -31,24 +27,18 @@ const [updateReponse, setUpdateResponse] = useState({});
   //Add items to cart
   const handleCartAddItems = async ({ _id, name, price, background_image, slug }) => {
     if (!token) return;
-    const data = await fetch(`${import.meta.env.VITE_API_URL}/user/cart`, {
-      method: "PATCH",
-      body: JSON.stringify({
-        token: token,
-        item: {
-          id: _id,
-          quantity: 1,
-          name: name,
-          slug: slug,
-          price: price,
-          image: background_image
-        }
-      }),
-      headers: {
-        "Content-type": "application/json",
-      },
+    const data = await apiClient.patch(`/user/cart/add`, {
+      token: token,
+      item: {
+        id: _id,
+        quantity: 1,
+        name: name,
+        slug: slug,
+        price: price,
+        image: background_image
+      }
     });
-    const res = await data.json();
+    const res = await data.data;
     if (!res.success) { 
       setError(res.error);
       return;
@@ -60,19 +50,14 @@ const [updateReponse, setUpdateResponse] = useState({});
   //Delete items from cart
   const handleCartDeleteItem = async (itemId) => {
     if (!token) return;
-    const data = await fetch(`${import.meta.env.VITE_API_URL}/user/cart`, {
-      method: "DELETE",
-      body: JSON.stringify({
-        token: token,
-        item: {
-          id: itemId,
-        }
-      }),
-      headers: {
-        "Content-type": "application/json",
-      },
+    const data = await apiClient.patch(`/user/cart/remove`, {
+      token: token,
+      item: {
+        id: itemId,
+      }
     });
-    const res = await data.json();
+
+    const res = await data.data;
     if (!res.success) { 
       setError(res.error);
       return;
