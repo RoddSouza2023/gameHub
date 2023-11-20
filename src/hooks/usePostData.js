@@ -19,8 +19,8 @@ const usePostData = (endpoint, requestConfig, deps=[]) => {
         setLoading(false);
       })
       .catch((err) => {
-        setLoading(false);
         if(err instanceof CanceledError) return;  
+        setLoading(false);
         setError(err.response.data.error);
     });
 

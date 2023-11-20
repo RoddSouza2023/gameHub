@@ -51,7 +51,7 @@ function Navbar({
           onClick={() => navigate("/cart")}
         />
         <div className='badge'>{cartLength}</div>
-        {localStorage.isLoggedIn ? (
+        {isLoggedIn ? (
           <>
             <Text
               onClick={() => navigate("/profile")}
@@ -62,7 +62,7 @@ function Navbar({
             <Text
               _hover={{ textDecoration: "underline", cursor: "pointer" }}
               onClick={() => {
-                setIsLoggedIn(false);
+                // setIsLoggedIn(false);
                 navigate("/logout");
               }}
             >

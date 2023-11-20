@@ -28,7 +28,6 @@ function App() {
   );
   const { data } = useCart(token);
   const [cartLength, setCartLength] = useState(0);
-
   const onSelectGenre = (genre) => setGameQuery({ ...gameQuery, genre });
   useEffect(() => {
     let length = 0;
@@ -45,6 +44,7 @@ function App() {
     }
   }, [data, isLoggedIn]);
 
+  console.log(isLoggedIn);
   return (
     <>
       <Navbar
@@ -55,6 +55,7 @@ function App() {
         selectedGenre={gameQuery.genre}
         onSearch={(searchText) => setGameQuery({ ...gameQuery, searchText })}
         setCurrentPage={setCurrentPage}
+        setCartLength={setCartLength}
       />
       <Routes>
         <Route
@@ -114,7 +115,9 @@ function App() {
         <Route path='/checkout' element={<CheckOut token={token} />}></Route>
         <Route
           path='/logout'
-          element={token ? <Logout /> : <PageNotFound />}
+          element={
+            token ? <Logout setIsLoggedIn={setIsLoggedIn} /> : <PageNotFound />
+          }
         ></Route>
       </Routes>
     </>

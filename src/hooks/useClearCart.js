@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import {apiClient} from "../services/api-client";
 
 function useClearCart(token) {
   const [response, setResponse] = useState({});
@@ -7,16 +8,8 @@ function useClearCart(token) {
   useEffect(() => {
     const clearCartCheckout = async () => {
       if (!token) return;
-      const data = await fetch(`${import.meta.env.VITE_API_URL}/user/remove_all_cart`, {
-        method: "PATCH",
-        body: JSON.stringify({
-          token: token,
-        }),
-        headers: {
-          "Content-type": "application/json",
-        },
-      });
-      const res = await data.json();
+      const data = apiClient.patch(`/user/remove_all_cart`, { token: token });
+      const res = await data.data;
       if (res.error) {
         setError(res.error);
         return;
