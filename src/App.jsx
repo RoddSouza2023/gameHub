@@ -18,7 +18,6 @@ import Logout from "./components/Logout";
 function App() {
   const token = localStorage.getItem("accessToken");
   const [currentPage, setCurrentPage] = useState(1);
-  const [demoUser, setDemoUser] = useState(false);
   const [gameQuery, setGameQuery] = useState({
     platform: null,
     genre: null,
@@ -84,23 +83,13 @@ function App() {
         <Route path={"*" || "/PageNotFound"} element={<PageNotFound />}></Route>
         <Route
           path='/login'
-          element={
-            <Login
-              demoUser={demoUser}
-              setDemoUser={setDemoUser}
-              setIsLoggedIn={setIsLoggedIn}
-            />
-          }
+          element={<Login setIsLoggedIn={setIsLoggedIn} />}
         ></Route>
         <Route path='/register' element={<Register />}></Route>
         <Route
           path='/change_password'
           element={
-            isLoggedIn ? (
-              <ChangePassword demoUser={demoUser} token={token} />
-            ) : (
-              <PageNotFound />
-            )
+            isLoggedIn ? <ChangePassword token={token} /> : <PageNotFound />
           }
         ></Route>
         <Route path='/verify' element={<VerifyEmail />}></Route>
@@ -127,11 +116,7 @@ function App() {
         <Route
           path='/logout'
           element={
-            token ? (
-              <Logout setDemoUser={setDemoUser} setIsLoggedIn={setIsLoggedIn} />
-            ) : (
-              <PageNotFound />
-            )
+            token ? <Logout setIsLoggedIn={setIsLoggedIn} /> : <PageNotFound />
           }
         ></Route>
       </Routes>

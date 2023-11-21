@@ -17,7 +17,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useUpdatePassword from "../hooks/useUpdatePassword";
 
-function ChangePassword({ token, demoUser }) {
+function ChangePassword({ token }) {
   const navigate = useNavigate();
   const [hidden, setHidden] = useState({
     currentPassword: true,
@@ -34,6 +34,9 @@ function ChangePassword({ token, demoUser }) {
   useEffect(() => {
     if (response.success);
   }, [response]);
+
+  const isDemo = JSON.parse(localStorage.getItem("demoUser")) || false;
+
   return (
     <Box padding={10} textAlign={"center"}>
       <Text fontSize={"2xl"} marginBottom={5}>
@@ -59,7 +62,7 @@ function ChangePassword({ token, demoUser }) {
         <FormLabel>Current Password</FormLabel>
         <InputGroup marginBottom={5}>
           <Input
-            disabled={demoUser}
+            disabled={isDemo}
             id='current-password'
             type={hidden.currentPassword ? "password" : "text"}
             onChange={(e) =>
@@ -85,7 +88,7 @@ function ChangePassword({ token, demoUser }) {
         <FormLabel>New Password</FormLabel>
         <InputGroup>
           <Input
-            disabled={demoUser}
+            disabled={isDemo}
             id='new-password'
             type={hidden.newPassword ? "password" : "text"}
             onChange={(e) =>
@@ -109,7 +112,7 @@ function ChangePassword({ token, demoUser }) {
           />
         </InputGroup>
         <Button
-          isDisabled={demoUser}
+          isDisabled={isDemo}
           marginTop={5}
           onClick={async () => {
             handleUpdatePassword(userData);

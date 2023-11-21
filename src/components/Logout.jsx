@@ -2,13 +2,13 @@ import { Container, Heading, Spinner, Text } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-function Logout({ setIsLoggedIn, setDemoUser }) {
+function Logout({ setIsLoggedIn }) {
   const navigate = useNavigate();
 
   useEffect(() => {
     const logOut = () => {
-      setDemoUser(false);
       setIsLoggedIn(false);
+      localStorage.removeItem("demoUser");
       localStorage.removeItem("accessToken");
       localStorage.removeItem("isLoggedIn");
     };

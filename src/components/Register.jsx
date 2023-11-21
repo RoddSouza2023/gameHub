@@ -23,7 +23,6 @@ function Register() {
     password: null,
   });
   const navigate = useNavigate();
-
   useEffect(() => {}, [response]);
 
   return (
@@ -31,16 +30,16 @@ function Register() {
       <Text fontSize='2xl' marginBottom={5}>
         Register
       </Text>
-      {error && !response.success ? (
+      {error ? (
         <Text margin={5} color={"red.500"}>
           {error}
         </Text>
       ) : null}
-      {response.success && (
+      {response.success && !error ? (
         <Text margin={5} color={"green.500"}>
           {response.message}
         </Text>
-      )}
+      ) : null}
       <FormControl maxW={400} marginX={"auto"}>
         <FormLabel>Name</FormLabel>
         <Input

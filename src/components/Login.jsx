@@ -19,9 +19,10 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useLogin from "../hooks/useLogin";
 
-function Login({ setIsLoggedIn, demoUser, setDemoUser }) {
+function Login({ setIsLoggedIn }) {
   const navigate = useNavigate();
   const [visibility, setVisibility] = useState(true);
+  const [demoUser, setDemoUser] = useState(false);
   const { handleLogin, response, error } = useLogin();
   const [userData, setUserData] = useState({
     email: "",
@@ -36,7 +37,7 @@ function Login({ setIsLoggedIn, demoUser, setDemoUser }) {
       }, 2000);
     }
   }, [response]);
-
+  // console.log(error);
   useEffect(() => {
     if (demoUser)
       setUserData({ email: "demouser@demo.com", password: "demouser" });
@@ -99,6 +100,7 @@ function Login({ setIsLoggedIn, demoUser, setDemoUser }) {
           <Button
             onClick={async () => {
               handleLogin(userData);
+              demoUser && localStorage.setItem("demoUser", true);
             }}
           >
             Login

@@ -6,19 +6,20 @@ function useRegister() {
   const [error, setError] = useState(null);
 
   const handleRegister = async ({ name, email, password }) => {
-    const data = await apiClient.post("/user/signup", {
-      name: name,
-      email: email,
-      password: password,
-    });
+    try {
+      setError(false);
+      const data = await apiClient.post("/user/signup", {
+        name: name,
+        email: email,
+        password: password,
+      });
 
-    const res = await data.data;
-    if (!res.success) { 
-      setError(res.error);
-      return;
-    };
-    
-    setResponse(res);
+      const res = await data.data;
+      
+      setResponse(res);
+    } catch (err) {
+      setError(err.response.data.error);
+    }
   }
 
   return { handleRegister, response, error }
