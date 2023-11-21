@@ -56,6 +56,7 @@ function App() {
         onSearch={(searchText) => setGameQuery({ ...gameQuery, searchText })}
         setCurrentPage={setCurrentPage}
         setCartLength={setCartLength}
+        setGameQuery={setGameQuery}
       />
       <Routes>
         <Route
