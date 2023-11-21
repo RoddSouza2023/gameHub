@@ -16,13 +16,17 @@ function Navbar({
   setCurrentPage,
   isLoggedIn,
   setIsLoggedIn,
+  setGameQuery,
 }) {
   const navigate = useNavigate();
 
   return (
     <HStack padding='10px' boxShadow={"0 0 5px black"} width={"100%"}>
       <Image
-        onClick={() => navigate("/")}
+        onClick={() => {
+          navigate("/");
+          setGameQuery({ platform: null, genre: null, sortOrder: null });
+        }}
         _hover={{
           cursor: "pointer",
         }}
@@ -62,7 +66,6 @@ function Navbar({
             <Text
               _hover={{ textDecoration: "underline", cursor: "pointer" }}
               onClick={() => {
-                // setIsLoggedIn(false);
                 navigate("/logout");
               }}
             >
