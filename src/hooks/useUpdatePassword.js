@@ -25,9 +25,9 @@ function useUpdatePassword() {
       setIsLoading(false);
       setError(false);
       setResponse(res);
-    } catch(error) {
+    } catch(err) {
       setIsLoading(false);
-      setError(error);
+      setError(err.response.data.error);
     }
   }
 

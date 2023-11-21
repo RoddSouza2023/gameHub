@@ -22,7 +22,7 @@ const useData = (endpoint, requestConfig={}, deps=[]) => {
       .catch((err) => {
         if(err instanceof CanceledError) return;  
         setLoading(false);
-        setError(err.message);
+        setError(err.response.data.error);
     });
 
     //clean up function

@@ -44,7 +44,6 @@ function App() {
     }
   }, [data, isLoggedIn]);
 
-  console.log(isLoggedIn);
   return (
     <>
       <Navbar

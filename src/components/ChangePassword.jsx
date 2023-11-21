@@ -34,6 +34,9 @@ function ChangePassword({ token }) {
   useEffect(() => {
     if (response.success);
   }, [response]);
+
+  const isDemo = JSON.parse(localStorage.getItem("demoUser")) || false;
+
   return (
     <Box padding={10} textAlign={"center"}>
       <Text fontSize={"2xl"} marginBottom={5}>
@@ -59,6 +62,7 @@ function ChangePassword({ token }) {
         <FormLabel>Current Password</FormLabel>
         <InputGroup marginBottom={5}>
           <Input
+            disabled={isDemo}
             id='current-password'
             type={hidden.currentPassword ? "password" : "text"}
             onChange={(e) =>
@@ -84,6 +88,7 @@ function ChangePassword({ token }) {
         <FormLabel>New Password</FormLabel>
         <InputGroup>
           <Input
+            disabled={isDemo}
             id='new-password'
             type={hidden.newPassword ? "password" : "text"}
             onChange={(e) =>
@@ -107,6 +112,7 @@ function ChangePassword({ token }) {
           />
         </InputGroup>
         <Button
+          isDisabled={isDemo}
           marginTop={5}
           onClick={async () => {
             handleUpdatePassword(userData);

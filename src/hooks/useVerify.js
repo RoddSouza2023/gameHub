@@ -6,14 +6,18 @@ function useVerify() {
   const [error, setError] = useState(null);
 
   const handleVerify = async ({ email, otp }) => {
-    const data = await apiClient.post(`/email_verification/verify`, { email: email, otp: otp });
-    const res = await data.data;
-    if (!res.success) { 
-      setError(res.error);
-      return;
-    };
-    
-    setResponse(res);
+    try {
+      const data = await apiClient.post(`/email_verification/verify`, { email: email, otp: otp });
+      const res = await data.data;
+      if (!res.success) { 
+        setError(res.error);
+        return;
+      };
+      
+      setResponse(res);
+    } catch (err) {
+      setError(err.response.data.error);
+    }
   }
 
   return { handleVerify, response, error }

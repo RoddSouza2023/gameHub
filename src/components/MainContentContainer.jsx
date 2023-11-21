@@ -92,7 +92,6 @@ function MainContentContainer({
                   isDisabled={currentPage === 1}
                   onClick={() => {
                     setCurrentPage(currentPage - 1);
-                    window.scrollTo({ top: 0 });
                   }}
                 >
                   Prev

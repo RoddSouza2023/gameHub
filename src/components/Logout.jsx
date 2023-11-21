@@ -8,6 +8,7 @@ function Logout({ setIsLoggedIn }) {
   useEffect(() => {
     const logOut = () => {
       setIsLoggedIn(false);
+      localStorage.removeItem("demoUser");
       localStorage.removeItem("accessToken");
       localStorage.removeItem("isLoggedIn");
     };

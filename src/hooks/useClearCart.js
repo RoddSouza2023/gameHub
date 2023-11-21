@@ -8,14 +8,18 @@ function useClearCart(token) {
   useEffect(() => {
     const clearCartCheckout = async () => {
       if (!token) return;
-      const data = apiClient.patch(`/user/remove_all_cart`, { token: token });
-      const res = await data.data;
-      if (res.error) {
-        setError(res.error);
-        return;
+      try {
+        const data = apiClient.patch(`/user/remove_all_cart`, { token: token });
+        const res = await data.data;
+        if (res.error) {
+          setError(res.error);
+          return;
+        }
+        setIsLoading(false);
+        setResponse(res);
+      } catch (err) {
+        setError(err.response.data.error);
       }
-      setIsLoading(false);
-      setResponse(res);
     };
 
     clearCartCheckout();

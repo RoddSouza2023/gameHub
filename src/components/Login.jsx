@@ -37,7 +37,7 @@ function Login({ setIsLoggedIn }) {
       }, 2000);
     }
   }, [response]);
-
+  // console.log(error);
   useEffect(() => {
     if (demoUser)
       setUserData({ email: "demouser@demo.com", password: "demouser" });
@@ -100,6 +100,7 @@ function Login({ setIsLoggedIn }) {
           <Button
             onClick={async () => {
               handleLogin(userData);
+              demoUser && localStorage.setItem("demoUser", true);
             }}
           >
             Login
