@@ -19,10 +19,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useLogin from "../hooks/useLogin";
 
-function Login({ setIsLoggedIn }) {
+function Login({ setIsLoggedIn, demoUser, setDemoUser }) {
   const navigate = useNavigate();
   const [visibility, setVisibility] = useState(true);
-  const [demoUser, setDemoUser] = useState(false);
   const { handleLogin, response, error } = useLogin();
   const [userData, setUserData] = useState({
     email: "",
